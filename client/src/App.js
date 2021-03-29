@@ -2,39 +2,35 @@ import React, { Component } from "react";
 import "./App.css";
 
 class App extends Component {
-  state = { users: [] };
+  constructor(props) {
+    super(props);
+    this.state = { status: "password" };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    if (this.state.status === "password") {
+      this.setState({ status: "text" });
+    } else {
+      this.setState({ status: "password" });
+    }
+  }
 
   render() {
     return (
-      <form action="signup" method="post">
-        <div className="container">
-          <h1> Sign up </h1>
-          <label htmlFor="Username">
-            <b>Username</b>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter username"
-            name="Username"
-            required
-          />
-          <label htmlFor="Password">
-            <b>Password</b>
-          </label>
-          <input
-            type="password"
-            placeholder="Enter password"
-            name="Password"
-            required
-          />
-          <div className="clearfix">
-            <button type="button" className="cancelbtn">
-              Cancel
-            </button>
-            <button type="submit" className="signupbtn">
-              Sign Up
-            </button>
-          </div>
+      <form action="/users/signup" method="post" className="tm-contact-form">
+        <div className="form-group">
+          <input type="text" name="Username" className="form-control" placeholder="Enter username" required/>
+        </div>
+        <div className="form-group">
+          <input type={this.state.status} name="Password" className="form-control" placeholder="Enter username" required/>
+          <input type="checkbox" onClick={this.handleClick} />
+            Show Password{" "}
+        </div>
+        <div className="form-group tm-d-flex">
+          <button type="submit" className="signupbtn">
+          Sign Up
+          </button>
         </div>
       </form>
     );
