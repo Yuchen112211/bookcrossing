@@ -23,7 +23,7 @@ const Signup = ({ setRegistering }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: document.getElementById("signupUsername").value,
+        username: body.username,
       }),
     })
       .then(function (response) {
@@ -147,7 +147,7 @@ const Signup = ({ setRegistering }) => {
             ref={register}
           />
         </div>
-        <button className="btn btn-primary" type={"submit"}>
+        <button className="signupbtn" type={"submit"}>
           C R E A T E
         </button>
       </form>

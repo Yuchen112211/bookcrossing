@@ -58,17 +58,17 @@ const Login = ({ userSetter, registerSetter }) => {
         />
       </div>
       <div className="form-group tm-d-flex">
-        <button type="submit" className="signupbtn" onClick={onLoginCLicked}>
+        <button type="submit" className="loginbtn" onClick={onLoginCLicked}>
           Login
         </button>
       </div>
       <div className="mt-4">
         <div className="d-flex justify-content-center links">
           Don't have an account?{" "}
-          <a href="#" className="ml-2" onClick={() => registerSetter(true)}>
+          <button className="ml-2 btn" onClick={() => registerSetter(true)}>
             {" "}
             Sign Up
-          </a>
+          </button>
         </div>
         <div className="d-flex justify-content-center links"></div>
       </div>
