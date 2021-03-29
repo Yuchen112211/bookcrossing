@@ -32,13 +32,18 @@ router.post("/signup", function (req, res, next) {
   });
 });
 
-router.get("/getUser", function (req, res, next) {
+router.post("/getUser", function (req, res, next) {
   const user = {
-    username: req.body.Username,
+    username: req.body.username,
+    password: req.body.password,
   };
-  db.select("users", user, function(data) {
-    res.status(200).send({user: data})
-  })
-})
+  db.select("users", user, function (data) {
+    if (data) {
+      res.send({ msg: "success" });
+    } else {
+      res.send({ msg: "Not exists" });
+    }
+  });
+});
 
 module.exports = router;
