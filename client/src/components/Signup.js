@@ -6,7 +6,9 @@ const Signup = ({ setRegistering }) => {
   const { register, handleSubmit, errors, watch } = useForm();
 
   const onSubmit = (data) => {
-    const url = "/users/signup";
+    const getUrl = "/users/getUser";
+    const signupUrl = "/users/signup";
+
     const body = {
       username: document.getElementById("signupUsername").value,
       password: document.getElementById("signupPassword").value,
@@ -14,20 +16,46 @@ const Signup = ({ setRegistering }) => {
       firstname: document.getElementById("firstname").value,
       lastname: document.getElementById("lastname").value,
     };
-    fetch(url, {
+
+    fetch(getUrl, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        username: document.getElementById("signupUsername").value,
+      }),
     })
       .then(function (response) {
-        console.log("Sign up successfully");
-        setRegistering(false);
-        setErrMsg("Sign up successfully");
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.msg === "success") {
+          const msg = `User ${body.username} exists`;
+          setErrMsg(msg);
+          console.log(msg);
+        } else {
+          fetch(signupUrl, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          })
+            .then(function (response) {
+              console.log("Sign up successfully");
+              setRegistering(false);
+              setErrMsg("Sign up successfully");
+            })
+            .catch(function (error) {
+              const msg = "Unknown Error, please try again.";
+              console.log(msg);
+              setErrMsg(msg);
+            });
+        }
       })
       .catch(function (error) {
-        const msg = "Unknown Error, please try again.";
+        const msg = "Unknown issue, please try again.";
         console.log(msg);
         setErrMsg(msg);
       });

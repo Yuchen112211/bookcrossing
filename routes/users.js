@@ -23,8 +23,11 @@ router.get("/", function (req, res, next) {
 
 router.post("/signup", function (req, res, next) {
   const user = {
-    username: req.body.Username,
-    password: req.body.Password,
+    username: req.body.username,
+    password: req.body.password,
+    address: req.body.address,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     datetime: new Date(),
   };
   db.insert("users", user, function () {
