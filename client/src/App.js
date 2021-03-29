@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import "./App.css";
 
 const App = () => {
@@ -8,7 +9,10 @@ const App = () => {
 
   return (
     <div className="loginForm">
-      <Login userSetter={setLoggedInUser} registerSetter={setRegistering} />
+      {!loggedInUser && !registering && (
+        <Login userSetter={setLoggedInUser} registerSetter={setRegistering} />
+      )}
+      {registering && <Signup setRegistering={setRegistering} />}
     </div>
   );
 };

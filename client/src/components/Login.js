@@ -26,11 +26,17 @@ const Login = ({ userSetter, registerSetter }) => {
         } else {
           console.log(`User ${body.username} does not exists`);
         }
+      })
+      .catch(function (error) {
+        const msg = "Unknown issue, please try again.";
+        console.log(msg);
+        setLoginError(msg);
       });
   };
 
   return (
     <div id="login">
+      <h1>Log In</h1>
       <div className="form-group">
         <input
           id="loginUsername"
