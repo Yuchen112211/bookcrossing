@@ -22,6 +22,7 @@ const Login = ({ userSetter, registerSetter }) => {
       .then(function (data) {
         if (data.msg === "success") {
           console.log(`User ${body.username} Log in success!`);
+          localStorage.setItem("loggedin", body.username);
           userSetter(data.data);
         } else {
           console.log(`User ${body.username} does not exists`);

@@ -98,7 +98,6 @@ const SendBook = () => {
   return (
     <div>
       {!bookSearchState && bookSearch}
-
       {bookSearchState && <BookData data={bookSearchData} />}
     </div>
   );
