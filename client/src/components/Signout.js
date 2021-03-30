@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Signout = () => {
   const user = localStorage.getItem("loggedin");

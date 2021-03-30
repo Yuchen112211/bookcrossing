@@ -32,7 +32,6 @@ const SendBook = () => {
       })
       .then(function (data) {
         if (data.msg === "success") {
-          console.log(`Books based on ${body} searched successfully.`);
           setBookSearchData(data.data);
           setBookSearchState(true);
         } else {
@@ -43,7 +42,7 @@ const SendBook = () => {
 
   const BookData = (props) => {
     const comps = props.data.map((book) => (
-      <div className="row tm-mb-p">
+      <div className="row tm-mb-p" key={book.isbn}>
         <div className="col-6">{book.title}</div>
         <div className="col-6">{book.isbn}</div>
       </div>

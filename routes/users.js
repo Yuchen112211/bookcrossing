@@ -22,7 +22,8 @@ router.post("/getUser", function (req, res, next) {
     password: req.body.password,
   };
   db.select("users", user, function (data) {
-    if (data) {
+    if (data.length) {
+      console.log(data.length);
       res.send({ msg: "success", data: data });
     } else {
       res.send({ msg: "Not exists" });

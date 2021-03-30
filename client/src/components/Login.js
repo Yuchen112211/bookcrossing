@@ -9,6 +9,11 @@ const Login = ({ userSetter, registerSetter }) => {
       username: document.getElementById("loginUsername").value,
       password: document.getElementById("loginPassword").value,
     };
+    if (!body.username || !body.password) {
+      const msg = `Please put in your username and password`;
+      setLoginError(msg);
+      return;
+    }
     fetch(url, {
       method: "post",
       headers: {
@@ -25,7 +30,9 @@ const Login = ({ userSetter, registerSetter }) => {
           localStorage.setItem("loggedin", body.username);
           userSetter(data.data);
         } else {
-          console.log(`User ${body.username} does not exists`);
+          const msg = `User ${body.username} does not exists`;
+          console.log(msg);
+          setLoginError(msg);
         }
       })
       .catch(function (error) {
@@ -63,6 +70,9 @@ const Login = ({ userSetter, registerSetter }) => {
           Login
         </button>
       </div>
+      <p id="loginError" style={{ color: "red" }}>
+        {loginError}
+      </p>
       <div className="mt-4">
         <div className="d-flex justify-content-center links">
           Don't have an account?{" "}
@@ -73,8 +83,6 @@ const Login = ({ userSetter, registerSetter }) => {
         </div>
         <div className="d-flex justify-content-center links"></div>
       </div>
-      <p id="login-error">{loginError}</p>
-      <p id="loginError">{loginError}</p>
     </div>
   );
 };
