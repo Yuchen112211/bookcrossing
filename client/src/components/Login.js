@@ -4,7 +4,7 @@ const Login = ({ userSetter, registerSetter }) => {
   const [loginError, setLoginError] = useState("");
 
   const onLoginClicked = () => {
-    const url = "/users/getUser";
+    const url = "users/getUser";
     const body = {
       username: document.getElementById("loginUsername").value,
       password: document.getElementById("loginPassword").value,

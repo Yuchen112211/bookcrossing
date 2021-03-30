@@ -6,7 +6,7 @@ const SendBook = () => {
   const [searchErrMsg, setSearchErrMsg] = useState("");
 
   const onSearchClicked = () => {
-    const url = "/books/getBook";
+    const url = "books/getBook";
     const isbn = document.getElementById("book-isbn").value;
     const title = document.getElementById("book-title").value;
     if (!isbn && !title) {

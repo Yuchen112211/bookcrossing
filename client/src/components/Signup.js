@@ -6,8 +6,8 @@ const Signup = ({ setRegistering }) => {
   const { register, handleSubmit, errors, watch } = useForm();
 
   const onSubmit = (data) => {
-    const getUrl = "/users/getUser";
-    const signupUrl = "/users/signup";
+    const getUrl = "users/getUser";
+    const signupUrl = "users/signup";
 
     const body = {
       username: document.getElementById("signupUsername").value,
