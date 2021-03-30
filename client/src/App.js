@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Book from "./components/Book";
 import "./App.css";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Login userSetter={setLoggedInUser} registerSetter={setRegistering} />
       )}
       {registering && <Signup setRegistering={setRegistering} />}
+      {loggedInUser && <Book />}
     </div>
   );
 };

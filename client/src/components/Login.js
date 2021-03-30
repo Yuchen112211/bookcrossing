@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Login = ({ userSetter, registerSetter }) => {
   const [loginError, setLoginError] = useState("");
 
-  const onLoginCLicked = () => {
+  const onLoginClicked = () => {
     const url = "/users/getUser";
     const body = {
       username: document.getElementById("loginUsername").value,
@@ -22,7 +22,7 @@ const Login = ({ userSetter, registerSetter }) => {
       .then(function (data) {
         if (data.msg === "success") {
           console.log(`User ${body.username} Log in success!`);
-          userSetter(data);
+          userSetter(data.data);
         } else {
           console.log(`User ${body.username} does not exists`);
         }
@@ -58,7 +58,7 @@ const Login = ({ userSetter, registerSetter }) => {
         />
       </div>
       <div className="form-group tm-d-flex">
-        <button type="submit" className="loginbtn" onClick={onLoginCLicked}>
+        <button type="submit" className="loginbtn" onClick={onLoginClicked}>
           Login
         </button>
       </div>

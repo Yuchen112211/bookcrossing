@@ -6,12 +6,23 @@ https://templatemo.com/tm-539-simple-house
 
 */
 
-ul, nav, body, h1, h2, h4, h6, p, figure {
+ul,
+nav,
+body,
+h1,
+h2,
+h4,
+h6,
+p,
+figure {
   margin: 0;
   padding: 0;
 }
 
-a, button { transition: all 0.3s ease; }
+a,
+button {
+  transition: all 0.3s ease;
+}
 
 /* Bootstrap grid system  */
 
@@ -39,7 +50,6 @@ html {
   padding-right: 15px;
 }
 
-
 .row {
   display: -ms-flexbox;
   display: flex;
@@ -54,7 +64,7 @@ html {
 .col-lg-6,
 .col-md-4,
 .col-md-6,
-.col-sm-6, 
+.col-sm-6,
 .col-12 {
   position: relative;
   width: 100%;
@@ -82,7 +92,7 @@ html {
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
   }
-  
+
   .col-md-6 {
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
@@ -96,13 +106,13 @@ html {
     flex: 0 0 25%;
     max-width: 25%;
   }
-  
+
   .col-lg-4 {
     -ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
   }
-  
+
   .col-lg-6 {
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
@@ -135,11 +145,11 @@ html {
 .tm-btn-default:hover,
 .tm-btn-default:focus {
   color: white;
-  background-color: #98999A;
+  background-color: #98999a;
 }
 
 .tm-btn-primary {
-  background-color: #2D99CC;
+  background-color: #2d99cc;
   color: white;
 }
 
@@ -173,7 +183,7 @@ html {
 }
 
 .tm-mb-p {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .tm-text-success {
@@ -194,7 +204,7 @@ html {
 }
 
 body {
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: "Open Sans", Arial, sans-serif;
   font-size: 17px;
   background-color: #ccc;
   overflow-x: hidden;
@@ -204,7 +214,8 @@ body {
   background-color: white;
 }
 
-p, address {
+p,
+address {
   color: #626364;
   line-height: 1.8;
 }
@@ -213,13 +224,13 @@ p, address {
 .placeholder {
   width: 100%;
   min-height: 460px;
-  background-color: #556E5B;
+  background-color: #556e5b;
 }
 
 .placeholder-2 {
   width: 100%;
   min-height: 220px;
-  background-color: #CFBEA5;
+  background-color: #cfbea5;
   position: relative;
   z-index: 998;
 }
@@ -377,11 +388,11 @@ p, address {
   .tm-section {
     max-width: 1120px;
   }
-  
+
   .tm-container-inner {
     max-width: 1120px;
   }
-  
+
   .tm-container-inner-2 {
     max-width: 900px;
   }
@@ -398,7 +409,7 @@ p, address {
 .tm-gallery-title {
   font-size: 1.3rem;
   font-weight: 400;
-  color: #1A6692;
+  color: #1a6692;
   margin-bottom: 15px;
 }
 
@@ -408,7 +419,7 @@ p, address {
 
 .tm-gallery-price {
   font-size: 1.25rem;
-  color: #2F956D;
+  color: #2f956d;
   margin-bottom: 60px;
 }
 
@@ -420,7 +431,7 @@ p, address {
 .tm-paging-item {
   list-style: none;
   display: inline-block;
-  border: 1px solid #2F956D;
+  border: 1px solid #2f956d;
   margin: 7px;
 }
 
@@ -430,18 +441,18 @@ p, address {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: #2F956D;
+  color: #2f956d;
   background-color: transparent;
 }
 
 .tm-paging-link.active,
 .tm-paging-link:hover {
-  background-color: #2F956D;
+  background-color: #2f956d;
   color: white;
 }
 
 .tm-description-figure {
-  text-align: center;  
+  text-align: center;
 }
 
 .tm-description-box {
@@ -481,7 +492,7 @@ p, address {
 }
 
 .tm-footer a:hover {
-  color: #1A6692;
+  color: #1a6692;
 }
 
 /* About */
@@ -511,7 +522,7 @@ p, address {
 .tm-person-name {
   font-size: 1.6rem;
   font-weight: 300;
-  color: #09C;
+  color: #09c;
   margin-bottom: 5px;
   margin-top: 15px;
 }
@@ -523,7 +534,7 @@ p, address {
 }
 
 .tm-person-title {
-  color: #C39;
+  color: #c39;
   margin-bottom: 20px;
 }
 
@@ -592,10 +603,10 @@ p, address {
 }
 
 @media (min-width: 768px) {
- .tm-history-img {
+  .tm-history-img {
     max-width: 50%;
   }
-  
+
   .tm-history-inner {
     flex-direction: row;
   }
@@ -604,7 +615,7 @@ p, address {
 .tm-history-title {
   font-size: 1.6rem;
   font-weight: 300;
-  color: #1A6692;
+  color: #1a6692;
   margin-bottom: 30px;
 }
 
@@ -618,10 +629,10 @@ p, address {
 }
 
 @media (min-width: 768px) {
- .tm-history-text {
+  .tm-history-text {
     max-width: auto;
     margin: 0 auto 0 35px;
-  } 
+  }
 }
 
 /* Contact Page */
@@ -630,9 +641,9 @@ p, address {
 }
 
 @media (min-width: 768px) {
- .tm-contact-form {
+  .tm-contact-form {
     max-width: 310px;
-  } 
+  }
 }
 
 .tm-d-flex {
@@ -720,9 +731,9 @@ address {
 }
 
 @media (min-width: 768px) {
- .tm-address-box {
+  .tm-address-box {
     max-width: 315px;
-  } 
+  }
 }
 
 .tm-contact-icon {
@@ -782,7 +793,7 @@ address {
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
   font-size: 1.2rem;
-  font-family: 'Open Sans', Helevetica, Arial, sans-serif;
+  font-family: "Open Sans", Helevetica, Arial, sans-serif;
   color: #999;
   background-color: transparent;
   border: 1px solid #d0d0d0;
@@ -797,13 +808,14 @@ address {
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.accordion.active, .accordion:hover {
-  color: #09C;
+.accordion.active,
+.accordion:hover {
+  color: #09c;
 }
 
 @keyframes changeIcon {
   0% {
-    content: '\f0d9';
+    content: "\f0d9";
   }
   50% {
     color: white;
@@ -815,7 +827,7 @@ address {
 
 @keyframes changeIconBack {
   0% {
-    content: '\f0d7';
+    content: "\f0d7";
   }
   50% {
     color: white;
@@ -826,10 +838,10 @@ address {
 }
 
 .accordion:after {
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   animation: changeIconBack 0.3s linear;
-  content: '\f0d9';
+  content: "\f0d9";
   font-size: 2rem;
   color: #999;
   float: right;
@@ -838,7 +850,7 @@ address {
 
 .accordion.active:after {
   animation: changeIcon 0.3s linear;
-  content: '\f0d7';
+  content: "\f0d7";
 }
 
 /* Style the accordion panel. Note: hidden by default */

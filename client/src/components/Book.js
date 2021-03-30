@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import RegisterBook from "./RegisterBook";
+import UpdateBook from "./UpdateBook";
+import SendBook from "./SendBook";
 
 const Book = () => {
   const [sendingState, setSendingState] = useState(false);
@@ -36,9 +39,25 @@ const Book = () => {
     </nav>
   );
 
+  const back = (
+    <button
+      onClick={() => {
+        setRegisteringState(false);
+        setUpdatingState(false);
+        setSendingState(false);
+      }}
+    >
+      Back
+    </button>
+  );
+
   return (
     <div className="tm-paging-links">
       {!sendingState && !registeringState && !updatingState && navigate}
+      {sendingState && <SendBook />}
+      {registeringState && <RegisterBook />}
+      {updatingState && <UpdateBook />}
+      {(sendingState || registeringState || updatingState) && back}
     </div>
   );
 };
