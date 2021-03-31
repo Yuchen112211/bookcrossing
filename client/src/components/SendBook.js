@@ -60,7 +60,6 @@ const SendBook = () => {
 
   const BookData = (props) => {
     const currentPage = props.currentPage;
-    console.log(currentPage);
     const comps = props.data.map((book, key) => (
       <div className="row tm-mb-p" key={book.isbn}>
         <div className="col-4">{book.title}</div>
@@ -80,7 +79,7 @@ const SendBook = () => {
     return (
       <div className="container">
         <div className="row">
-          <h1>Search Result</h1>
+          <h1>Search Result - Page {pageSelected}</h1>
           <div className="col-4">
             <b>Title </b>
           </div>
@@ -91,7 +90,11 @@ const SendBook = () => {
         </div>
         <div className="row">
           {pageCount !== 0 && (
-            <Pagination pageSetter={setPage} pageCount={pageCount} />
+            <Pagination
+              currentPage={pageSelected}
+              pageSetter={setPage}
+              pageCount={pageCount}
+            />
           )}
         </div>
       </div>

@@ -1,33 +1,84 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Pagination = ({ pageSetter, pageCount }) => {
+const Pagination = ({ currentPage, pageSetter, pageCount }) => {
   const pages = () => {
     var indexes = [];
-    for (var i = 1; i < pageCount + 1; i++) {
+
+    if (currentPage > 5) {
+      indexes.push("...");
+    }
+    for (
+      var i = Math.max(1, currentPage - 4);
+      i < Math.min(pageCount + 1, currentPage + 5);
+      i++
+    ) {
       indexes.push(i);
     }
-    return indexes.map((index) => (
-      <td key={index}>
-        <a
-          className="active"
-          href="#"
-          onClick={() => {
-            pageSetter(index);
-          }}
-        >
-          {index}
-        </a>
-      </td>
+    if (pageCount + 1 > currentPage + 5) {
+      indexes.push("...");
+    }
+    return indexes.map((val, index) => (
+      <b key={index}>
+        {Number.isInteger(val) && (
+          <a
+            href="#"
+            onClick={() => {
+              pageSetter(val);
+            }}
+          >
+            {val}
+          </a>
+        )}
+        {!Number.isInteger(val) && <a>...</a>}
+      </b>
     ));
   };
 
   return (
-    <table>
-      <tbody>
-        <tr>{pages()}</tr>
-      </tbody>
-    </table>
+    <div className="pagination">
+      <a
+        href="#"
+        onClick={() => {
+          if (currentPage > 0) {
+            pageSetter(1);
+          }
+        }}
+      >
+        Head
+      </a>
+      <a
+        href="#"
+        onClick={() => {
+          if (currentPage > 0) {
+            pageSetter(currentPage - 1);
+          }
+        }}
+      >
+        Prev
+      </a>
+      {pages()}
+      <a
+        href="#"
+        onClick={() => {
+          if (currentPage < pageCount) {
+            pageSetter(currentPage + 1);
+          }
+        }}
+      >
+        Next
+      </a>
+      <a
+        href="#"
+        onClick={() => {
+          if (currentPage < pageCount) {
+            pageSetter(pageCount);
+          }
+        }}
+      >
+        Tail
+      </a>
+    </div>
   );
 };
 
