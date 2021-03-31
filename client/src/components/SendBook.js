@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Pagination from "./Pagination";
 
 const SendBook = () => {
-  const [bookSearchData, setBookSearchData] = useState();
+  const [bookSearchData, setBookSearchData] = useState([]);
+  const [currentBookSearchData, setCurrentBookSearchData] = useState();
   const [bookSearchState, setBookSearchState] = useState(false);
   const [searchErrMsg, setSearchErrMsg] = useState("");
+  const [pageSelected, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
+
+  useEffect(() => {
+    const currentBooks = [];
+    bookSearchData.forEach((book, key) => {
+      if (
+        parseInt(key) >= (pageSelected - 1) * 10 &&
+        parseInt(key) <= pageSelected * 10
+      ) {
+        currentBooks.push(book);
+      }
+    });
+    setCurrentBookSearchData(currentBooks);
+  }, [bookSearchData, pageSelected]);
 
   const onSearchClicked = () => {
     const url = "books/getBook";
@@ -32,6 +49,7 @@ const SendBook = () => {
       })
       .then(function (data) {
         if (data.msg === "success") {
+          setPageCount(parseInt(data.data.length / 10, 10) + 1);
           setBookSearchData(data.data);
           setBookSearchState(true);
         } else {
@@ -41,23 +59,41 @@ const SendBook = () => {
   };
 
   const BookData = (props) => {
-    const comps = props.data.map((book) => (
+    const currentPage = props.currentPage;
+    console.log(currentPage);
+    const comps = props.data.map((book, key) => (
       <div className="row tm-mb-p" key={book.isbn}>
-        <div className="col-6">{book.title}</div>
-        <div className="col-6">{book.isbn}</div>
+        <div className="col-4">{book.title}</div>
+        <div className="col-4">{book.isbn}</div>
+        <div className="col-4">
+          <button
+            onClick={() => {
+              alert("clicked");
+            }}
+          >
+            Send this Book
+          </button>
+        </div>
       </div>
     ));
 
     return (
-      <div className="row">
-        <h1>Search Result</h1>
-        <div className="col-6">
-          <b>Title </b>
+      <div className="container">
+        <div className="row">
+          <h1>Search Result</h1>
+          <div className="col-4">
+            <b>Title </b>
+          </div>
+          <div className="col-4">
+            <b> ISBN </b>
+          </div>
+          <div>{comps}</div>
         </div>
-        <div className="col-6">
-          <b> ISBN </b>
+        <div className="row">
+          {pageCount !== 0 && (
+            <Pagination pageSetter={setPage} pageCount={pageCount} />
+          )}
         </div>
-        <div>{comps}</div>
       </div>
     );
   };
@@ -97,7 +133,9 @@ const SendBook = () => {
   return (
     <div>
       {!bookSearchState && bookSearch}
-      {bookSearchState && <BookData data={bookSearchData} />}
+      {bookSearchState && (
+        <BookData data={currentBookSearchData} currentPage={pageSelected} />
+      )}
     </div>
   );
 };
