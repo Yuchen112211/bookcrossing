@@ -57,6 +57,7 @@ const Book = () => {
       {sendingState && <SendBook />}
       {registeringState && <RegisterBook />}
       {updatingState && <UpdateBook />}
+      <br />
       {(sendingState || registeringState || updatingState) && back}
     </div>
   );

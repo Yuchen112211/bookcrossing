@@ -20,6 +20,7 @@ figure {
 }
 ..pagination {
   display: inline-block;
+  align-items: center;
 }
 
 .pagination a {
@@ -27,6 +28,7 @@ figure {
   float: left;
   padding: 8px 16px;
   text-decoration: none;
+  margin: auto;
   transition: background-color 0.3s;
   border: 1px solid #ddd;
   font-size: 22px;
