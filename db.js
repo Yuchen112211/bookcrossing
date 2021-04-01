@@ -30,6 +30,26 @@ exports.selectAll = function (collection, callback) {
   );
 };
 
+exports.selectOne = function (collection, filter = {}, callback) {
+  client.connect(
+    mongoUrl,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, db) {
+      if (err) throw err;
+      const dbo = db.db("booksharing");
+      dbo
+        .collection(collection)
+        .findOne(filter, function(err, res) {
+          if (err) {
+            throw err;
+          }
+          callback(res);
+          db.close
+        })
+    }
+  );
+};
+
 exports.select = function (collection, filter = {}, callback) {
   client.connect(
     mongoUrl,
