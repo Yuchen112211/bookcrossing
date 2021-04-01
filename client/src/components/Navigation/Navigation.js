@@ -16,6 +16,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import Signout from "../Signout";
 
 function Navigation(props) {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -101,7 +102,7 @@ function Navigation(props) {
                   Library
                 </NavLink>
               </NavItem>
-              {props.signedIn ? (
+              {localStorage.getItem("loggedin") ? (
                 <NavItem>
                   <NavLink to="/profile" tag={Link}>
                     Profile
@@ -117,6 +118,19 @@ function Navigation(props) {
                   >
                     <p>SIGN IN</p>
                   </Button>
+                </NavItem>
+              )}
+              {localStorage.getItem("loggedin") && (
+                <NavItem>
+                  <NavLink
+                    tag={Link}
+                    to="/home"
+                    onClick={() => {
+                      localStorage.removeItem("loggedin");
+                    }}
+                  >
+                    SIGN OUT
+                  </NavLink>
                 </NavItem>
               )}
               <NavItem>

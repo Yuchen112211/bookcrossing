@@ -10,7 +10,7 @@ import HomeHeader from "components/Headers/HomeHeader.js";
 import Footer from "components/Footer/Footer.js";
 
 function Home() {
-  const [signedIn, setSignedIn] = React.useState();
+  const [signedIn, setSignedIn] = React.useState(false);
 
   React.useEffect(() => {
     document.body.classList.add("index-page");
@@ -25,9 +25,9 @@ function Home() {
   });
   return (
     <>
-      <Navigation signedIn={signedIn} />
+      <Navigation signedIn={signedIn} setSignedIn={setSignedIn} />
       <div className="wrapper">
-        {signedIn ? <HomeHeader /> : <WelcomeHeader />}
+        {localStorage.getItem("loggedin") ? <HomeHeader /> : <WelcomeHeader />}
         <div className="main">
           <div className="section section-about section-story-overview">
             <Container>

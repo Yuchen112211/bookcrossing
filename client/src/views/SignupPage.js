@@ -30,7 +30,7 @@ import {
 import Navigation from "components/Navigation/Navigation.js";
 import Footer from "components/Footer/Footer.js";
 
-function SignupPage(setRegistering) {
+function SignupPage(props) {
   const [usernameFocus, setUsernameFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
   const [addressFocus, setAddressFocus] = React.useState(false);
@@ -79,7 +79,6 @@ function SignupPage(setRegistering) {
           })
             .then(function (response) {
               console.log("Sign up successfully");
-              setRegistering(false);
               setErrMsg("Sign up successfully");
             })
             .catch(function (error) {

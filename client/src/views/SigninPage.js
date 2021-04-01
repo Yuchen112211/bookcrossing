@@ -52,10 +52,9 @@ function SigninPage(userSetter, registerSetter) {
         if (data.msg === "success") {
           console.log(`User ${body.username} Log in success!`);
           localStorage.setItem("loggedin", body.username);
-          userSetter(data.data);
+          window.location = "/home";
         } else {
-          const msg = `User ${body.username} does not exists`;
-          console.log(msg);
+          const msg = `Incorrect information, check either your username or password. `;
           setLoginError(msg);
         }
       })
@@ -154,7 +153,7 @@ function SigninPage(userSetter, registerSetter) {
               </Card>
             </Col>
             <div>
-              <p id="loginError" style={{ color: "red" }}>
+              <p id="loginError" style={{ color: "white" }}>
                 {loginError}
               </p>
             </div>
