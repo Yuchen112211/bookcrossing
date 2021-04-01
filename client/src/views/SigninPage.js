@@ -28,7 +28,7 @@ function SigninPage(userSetter, registerSetter) {
   const [passwordFocus, setPasswordFocus] = React.useState(false);
 
   const onLoginClicked = () => {
-    const url = "users/getUser";
+    const url = "signin";
     const body = {
       username: document.getElementById("fieldUsername").value,
       password: document.getElementById("fieldPassword").value,
@@ -91,7 +91,7 @@ function SigninPage(userSetter, registerSetter) {
           <Container>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
-                <Form action="" className="form" method="">
+                <Form action="" className="form" method="POST">
                   <CardHeader className="text-center">
                     <BookHalf size={96} />
                   </CardHeader>
