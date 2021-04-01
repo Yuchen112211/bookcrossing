@@ -67,7 +67,17 @@ const SendBook = () => {
         <div className="col-4">
           <button
             onClick={() => {
-              alert("clicked");
+              fetch("/users/getRandom")
+                .then(function (response) {
+                  return response.json();
+                })
+                .then(function (data) {
+                  // TBD
+                  console.log(data.data[0].username);
+                  alert(
+                    `Got Random user: ${data.data[0].username} with address: ${data.data[0].mailing_address}`
+                  );
+                });
             }}
           >
             Send this Book

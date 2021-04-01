@@ -52,6 +52,26 @@ exports.select = function (collection, filter = {}, callback) {
   );
 };
 
+exports.getRandom = function (collection, filter = {}, callback) {
+  filter;
+  client.connect(
+    mongoUrl,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, db) {
+      if (err) throw err;
+      const dbo = db.db("booksharing");
+      dbo
+        .collection(collection)
+        .aggregate([{ $match: filter }, { $sample: { size: 1 } }])
+        .toArray(function (err, docs) {
+          if (err) throw err;
+          callback(docs);
+          db.close();
+        });
+    }
+  );
+};
+
 exports.insert = function (collection, obj, callback) {
   client.connect(
     mongoUrl,
