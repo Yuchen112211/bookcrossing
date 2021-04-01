@@ -156,12 +156,28 @@ function SendPage() {
           <div className="section section-about section-story-overview">
             {!searchState && <SearchForm />}
             {searchState && (
-              <div className="section section-about section-story-overview">
-                <Books data={currentSearchData} pageSelected={pageSelected} />
-              </div>
+              <>
+                <div className="section section-about section-story-overview">
+                  <Books data={currentSearchData} pageSelected={pageSelected} />
+                </div>
+                <Container>
+                  <Button
+                    block
+                    className="btn-round btn-info"
+                    color="info"
+                    onClick={() => {
+                      setSearchState(false);
+                    }}
+                    size="lg"
+                  >
+                    Search another
+                  </Button>
+                </Container>
+              </>
             )}
+            {searchState}
             <Container>
-              {pageCount && (
+              {searchState && (
                 <Pagination
                   currentPage={pageSelected}
                   pageSetter={setPage}
