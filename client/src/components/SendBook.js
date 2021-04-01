@@ -72,7 +72,8 @@ const SendBook = () => {
                   return response.json();
                 })
                 .then(function (data) {
-                  // TBD
+                  // TBD: Follow-up render/component
+                  // TBD: Avoid duplicate (sending book to myself)
                   console.log(data.data[0].username);
                   alert(
                     `Got Random user: ${data.data[0].username} with address: ${data.data[0].mailing_address}`

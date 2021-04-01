@@ -21,23 +21,23 @@ const Pagination = ({ currentPage, pageSetter, pageCount }) => {
     return indexes.map((val, index) => (
       <b key={index}>
         {Number.isInteger(val) && (
-          <a
+          <button
             href="#"
             onClick={() => {
               pageSetter(val);
             }}
           >
             {val}
-          </a>
+          </button>
         )}
-        {!Number.isInteger(val) && <a>...</a>}
+        {!Number.isInteger(val) && <button>...</button>}
       </b>
     ));
   };
 
   return (
     <div className="pagination">
-      <a
+      <button
         href="#"
         onClick={() => {
           if (currentPage > 0) {
@@ -46,19 +46,19 @@ const Pagination = ({ currentPage, pageSetter, pageCount }) => {
         }}
       >
         Head
-      </a>
-      <a
+      </button>
+      <button
         href="#"
         onClick={() => {
-          if (currentPage > 0) {
+          if (currentPage > 1) {
             pageSetter(currentPage - 1);
           }
         }}
       >
         Prev
-      </a>
+      </button>
       {pages()}
-      <a
+      <button
         href="#"
         onClick={() => {
           if (currentPage < pageCount) {
@@ -67,8 +67,8 @@ const Pagination = ({ currentPage, pageSetter, pageCount }) => {
         }}
       >
         Next
-      </a>
-      <a
+      </button>
+      <button
         href="#"
         onClick={() => {
           if (currentPage < pageCount) {
@@ -77,7 +77,7 @@ const Pagination = ({ currentPage, pageSetter, pageCount }) => {
         }}
       >
         Tail
-      </a>
+      </button>
     </div>
   );
 };
