@@ -22,7 +22,7 @@ import { BookHalf, PersonCircle, ShieldLock } from "react-bootstrap-icons";
 import Navigation from "components/Navigation/Navigation.js";
 import Footer from "components/Footer/Footer.js";
 
-function SinginUp(userSetter, registerSetter) {
+function SigninPage(userSetter, registerSetter) {
   const [loginError, setLoginError] = React.useState("");
   const [usernameFocus, setUsernameFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
@@ -166,4 +166,4 @@ function SinginUp(userSetter, registerSetter) {
   );
 }
 
-export default SinginUp;
+export default SigninPage;
