@@ -16,7 +16,6 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import Signout from "../Signout";
 
 function Navigation(props) {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
