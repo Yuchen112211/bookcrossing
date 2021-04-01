@@ -1,341 +1,65 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>book crossing neu</title>
-		<link
-			href="https://fonts.googleapis.com/css?family=Open+Sans:400"
-			rel="stylesheet"
-		/>
-		<!-- CSS only -->
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-			crossorigin="anonymous"
-		/>
+<!--
 
-		<link href="css/templatemo-style.css" rel="stylesheet" />
-		<script src="js/jquery.min.js"></script>
-		<script src="js/parallax.min.js"></script>
-	</head>
-	<!--
+=========================================================
+* Now UI Kit React - v1.4.0
+=========================================================
 
-Simple House
+* Product Page: https://www.creative-tim.com/product/now-ui-kit-react
+* Copyright 2020 Creative Tim (http://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/now-ui-kit-react/blob/master/LICENSE.md)
 
-https://templatemo.com/tm-539-simple-house
+* Designed by www.invisionapp.com Coded by www.creative-tim.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 -->
-	<body>
-		<div class="container">
-			<!-- Top box -->
-			<!-- Logo & Site Name -->
-			<div class="placeholder">
-				<div
-					class="parallax-window"
-					data-parallax="scroll"
-					data-image-src="img/book.jpg"
-				>
-					<div class="tm-header">
-						<div class="row tm-header-inner">
-							<div class="col-md-6 col-12">
-								<img
-									src="img/simple-house-logo.png"
-									alt="Logo"
-									class="tm-site-logo"
-								/>
-								<div class="tm-site-text-box">
-									<h1 class="tm-site-title">book crossing neu</h1>
-									<h6 class="tm-site-description">book sharing platform</h6>
-								</div>
-							</div>
-							<nav class="col-md-6 col-12 tm-nav">
-								<ul class="tm-nav-ul">
-									<li class="tm-nav-li">
-										<a href="index.html" class="tm-nav-link">Home</a>
-									</li>
-									<li class="tm-nav-li" id="signout-btn"></li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-			<main>
-				<header class="row tm-welcome-section">
-					<h2 class="col-12 text-center tm-section-title">
-						Welcome to Book Crossing
-					</h2>
-					<p class="col-12 text-center">
-						Here you can register your book, send a book to a total random book
-						lover, and receiving books from others! Let's explore the true
-						emotion and culture written into words, grasp the wisdom of the
-						human race.
-					</p>
-				</header>
-				<div id="book-operate"></div>
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <!--     Fonts and icons     -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    />
+    <title>Bookcrossing</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
-				<!--
-			<div class="row tm-gallery">
-				<div id="tm-gallery-page-pizza" class="tm-gallery-page">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Fusce dictum finibus</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$45 / $55</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/02.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Aliquam sagittis</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$65 / $70</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Sed varius turpis</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$30.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Aliquam sagittis</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$25.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Maecenas eget justo</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$80.25</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/06.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Quisque et felis eros</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$20 / $40 / $60</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Sed ultricies dui</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$94</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Donec porta consequat</h4>
-								<p class="tm-gallery-description">Nam in suscipit nisi, sit amet consectetur metus. Ut sit amet tellus accumsan</p>
-								<p class="tm-gallery-price">$15</p>
-							</figcaption>
-						</figure>
-					</article>
-				</div> 
-				
-				<div id="tm-gallery-page-salad" class="tm-gallery-page hidden">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Salad Menu One</h4>
-								<p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc. Vestibulum tristique</p>
-								<p class="tm-gallery-price">$25</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Second Title Salad</h4>
-								<p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc. Vestibulum tristique</p>
-								<p class="tm-gallery-price">$30</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Third Salad Item</h4>
-								<p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc. Vestibulum tristique</p>
-								<p class="tm-gallery-price">$45</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Superior Salad</h4>
-								<p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc. Vestibulum tristique</p>
-								<p class="tm-gallery-price">$50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Sed ultricies dui</h4>
-								<p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc. Vestibulum tristique</p>
-								<p class="tm-gallery-price">$55 / $60</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Maecenas eget justo</h4>
-								<p class="tm-gallery-description">Proin eu velit egestas, viverra sapien eget, consequat nunc. Vestibulum tristique</p>
-								<p class="tm-gallery-price">$75</p>
-							</figcaption>
-						</figure>
-					</article>
-				</div> 
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-				<div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Noodle One</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$12.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Noodle Second</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$15.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/06.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Third Soft Noodle</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$20.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Aliquam sagittis</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$30.25</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Maecenas eget justo</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$35.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Quisque et felis eros</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$40.50</p>
-							</figcaption>
-						</figure>
-					</article>
-
-				</div> 
-			</div>
-
-			<div class="tm-section tm-container-inner">
-				<div class="row">
-					<div class="col-md-6">
-						<figure class="tm-description-figure">
-							<img src="img/img-01.jpg" alt="Image" class="img-fluid" />
-						</figure>
-					</div>
-					<div class="col-md-6">
-						<div class="tm-description-box"> 
-							<h4 class="tm-gallery-title">Maecenas nulla neque</h4>
-							<p class="tm-mb-45">Redistributing this template as a downloadable ZIP file on any template collection site is strictly prohibited. You will need to <a rel="nofollow" href="https://templatemo.com/contact">talk to us</a> for additional permissions about our templates. Thank you.</p>
-							<a href="about.html" class="tm-btn tm-btn-default tm-right">Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-      -->
-				<div class="tm-container-inner-2 tm-contact-section">
-					<div class="row">
-						<div class="col-md-1"></div>
-						<div class="col-md-12" id="root"></div>
-					</div>
-				</div>
-			</main>
-
-			<footer class="tm-footer text-center">
-				<p>
-					Copyright &copy; 2020 Simple House | Design:
-					<a rel="nofollow" href="https://templatemo.com">TemplateMo</a>
-				</p>
-			</footer>
-		</div>
-		<!-- <script>
-		$(document).ready(function(){
-			// Handle click on paging links
-			$('.tm-paging-link').click(function(e){
-				e.preventDefault();
-				
-				var page = $(this).text().toLowerCase();
-				$('.tm-gallery-page').addClass('hidden');
-				$('#tm-gallery-page-' + page).removeClass('hidden');
-				$('.tm-paging-link').removeClass('active');
-				$(this).addClass("active");
-			});
-		});
-	</script> -->
-	</body>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
