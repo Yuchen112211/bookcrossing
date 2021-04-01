@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
-import { BookHalf, Stars } from "react-bootstrap-icons";
+import { BookHalf } from "react-bootstrap-icons";
 
 function WelcomeHeader() {
   let pageHeader = React.createRef();
@@ -45,9 +45,8 @@ function WelcomeHeader() {
               size="lg"
               tag={Link}
             >
-              <Stars />
+              <i className="now-ui-icons objects_spaceship" />
               &nbsp;&nbsp;&nbsp;Get Started&nbsp;&nbsp;&nbsp;
-              <Stars />
             </Button>
           </div>
         </Container>
