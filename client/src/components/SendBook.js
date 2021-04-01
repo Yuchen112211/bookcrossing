@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const SendBook = () => {
   const [bookSearchData, setBookSearchData] = useState();
+  const [currentBookSearchData, setCurrentBookSearchData] = useState();
   const [bookSearchState, setBookSearchState] = useState(false);
   const [searchErrMsg, setSearchErrMsg] = useState("");
+  const [pageSelected, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
+
+  useEffect(() => {
+    const currentBooks = [];
+    bookSearchData.forEach((book, key) => {
+      if (
+        parseInt(key) >= (pageSelected - 1) * 10 &&
+        parseInt(key) <= pageSelected * 10
+      ) {
+        currentBooks.push(book);
+      }
+    });
+    setCurrentBookSearchData(currentBooks);
+  }, [bookSearchData, pageSelected]);
 
   const onSearchClicked = () => {
     const url = "books/getBook";
@@ -32,6 +48,7 @@ const SendBook = () => {
       })
       .then(function (data) {
         if (data.msg === "success") {
+          setPageCount(parseInt(data.data.length / 10, 10) + 1);
           setBookSearchData(data.data);
           setBookSearchState(true);
         } else {
@@ -97,7 +114,9 @@ const SendBook = () => {
   return (
     <div>
       {!bookSearchState && bookSearch}
-      {bookSearchState && <BookData data={bookSearchData} />}
+      {bookSearchState && (
+        <BookData data={currentBookSearchData} pageSelected={pageSelected} />
+      )}
     </div>
   );
 };
