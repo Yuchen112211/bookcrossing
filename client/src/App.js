@@ -15,6 +15,7 @@ import LibraryPage from "views/LibraryPage.js";
 import ProfilePage from "views/ProfilePage.js";
 import SendPage from "views/SendPage.js";
 import ReceivePage from "views/ReceivePage.js";
+import SendResultPage from "views/SendResultPage.js";
 
 export default function App() {
   return (
@@ -33,6 +34,10 @@ export default function App() {
           <Route path="/signin" render={(props) => <SigninPage {...props} />} />
           <Route path="/signup" render={(props) => <SignupPage {...props} />} />
           <Route path="/send" render={(props) => <SendPage {...props} />} />
+          <Route
+            path="/sendResult"
+            render={(props) => <SendResultPage {...props} />}
+          />
           <Route
             path="/receive"
             render={(props) => <ReceivePage {...props} />}

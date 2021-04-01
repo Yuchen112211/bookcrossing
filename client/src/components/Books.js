@@ -8,45 +8,44 @@ import {
   CardTitle,
   CardSubtitle,
   CardText,
+  CardFooter,
+  Button,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const Books = (props) => {
-  const [selected, setSelected] = React.useState();
-
   const Book = (props) => {
     const book = props.book;
-    const [bgColor, setBgColor] = React.useState("");
     return (
-      <Row
-        onMouseEnter={() => {
-          if (!selected) setBgColor("secondary");
-          if (selected === book.isbn) setBgColor("secondary");
-        }}
-        onMouseLeave={() => {
-          if (!selected) setBgColor("");
-        }}
-      >
-        <Col
-          className="ml-auto mr-auto text-center"
-          onClick={() => {
-            if (book.isbn === selected) {
-              setSelected("");
-            } else {
-              setSelected(book.isbn);
-            }
-          }}
-        >
-          <Card color={bgColor}>
+      <Row>
+        <Col className="ml-auto mr-auto text-center" md="6">
+          <Card>
             <CardBody>
               <CardTitle>
                 <b>{book.title}</b>
               </CardTitle>
-              <CardSubtitle>by {book.authors}</CardSubtitle>
+              <CardSubtitle>
+                by <i>{book.authors}</i>
+              </CardSubtitle>
               <CardText>
                 isbn:{"  "}
                 {book.isbn}
               </CardText>
             </CardBody>
+            <CardFooter>
+              <Button
+                block
+                onClick={() => {
+                  localStorage.setItem("sentBook", JSON.stringify(book));
+                }}
+                to="/sendResult"
+                size="lg"
+                tag={Link}
+              >
+                {" "}
+                Send this book
+              </Button>
+            </CardFooter>
           </Card>
         </Col>
       </Row>
