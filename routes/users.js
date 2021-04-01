@@ -30,4 +30,13 @@ router.post("/getUser", function (req, res, next) {
   });
 });
 
+router.get("/getRandom", function (req, res, next) {
+  db.getRandom("users", {}, function (data) {
+    console.log(
+      `Got Random user: ${data.username} with address: ${data.mailing_address}`
+    );
+    res.send({ msg: "success", data: data });
+  });
+});
+
 module.exports = router;
