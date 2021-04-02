@@ -12,12 +12,13 @@ import {
   Card,
   CardBody,
   CardTitle,
-  CardSubtitle,
-  CardText,
-  CardFooter,
 } from "reactstrap";
 
 function SendResultPage() {
+  const [recipient, setRecipient] = React.useState({});
+
+  const book = JSON.parse(localStorage.getItem("sentBook"));
+
   React.useEffect(() => {
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
@@ -29,6 +30,7 @@ function SendResultPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+
   const getRandomUser = () => {
     fetch("/users/getRandom", {
       method: "post",
@@ -43,9 +45,12 @@ function SendResultPage() {
       .then(function (data) {
         if (data.msg === "success") {
           localStorage.setItem("recipient", JSON.stringify(data.data[0]));
+          setRecipient(data.data[0]);
         }
       });
   };
+
+  if (Object.keys(recipient).length === 0) getRandomUser();
 
   const afterRedirect = () => {
     localStorage.removeItem("recipient");
@@ -75,10 +80,6 @@ function SendResultPage() {
         }
       });
   };
-
-  const book = JSON.parse(localStorage.getItem("sentBook"));
-  getRandomUser();
-  const recipient = JSON.parse(localStorage.getItem("recipient"));
 
   return (
     <>
