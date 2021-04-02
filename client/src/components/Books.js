@@ -17,38 +17,36 @@ const Books = (props) => {
   const Book = (props) => {
     const book = props.book;
     return (
-      <Row>
-        <Col className="ml-auto mr-auto text-center" md="6">
-          <Card>
-            <CardBody>
-              <CardTitle>
-                <b>{book.title}</b>
-              </CardTitle>
-              <CardSubtitle>
-                by <i>{book.authors}</i>
-              </CardSubtitle>
-              <CardText>
-                isbn:{"  "}
-                {book.isbn}
-              </CardText>
-            </CardBody>
-            <CardFooter>
-              <Button
-                block
-                onClick={() => {
-                  localStorage.setItem("sentBook", JSON.stringify(book));
-                }}
-                to="/sendResult"
-                size="lg"
-                tag={Link}
-              >
-                {" "}
-                Send this book
-              </Button>
-            </CardFooter>
-          </Card>
-        </Col>
-      </Row>
+      <Col className="ml-auto mr-auto text-center" md="4">
+        <Card>
+          <CardBody style={{ height: "9rem" }}>
+            <CardTitle>
+              <b>{book.title}</b>
+            </CardTitle>
+            <CardSubtitle>
+              by <i>{book.authors}</i>
+            </CardSubtitle>
+            <CardText>
+              isbn:{"  "}
+              {book.isbn}
+            </CardText>
+          </CardBody>
+          <CardFooter>
+            <Button
+              block
+              onClick={() => {
+                localStorage.setItem("sentBook", JSON.stringify(book));
+              }}
+              to="/sendResult"
+              size="lg"
+              tag={Link}
+            >
+              {" "}
+              Send this book
+            </Button>
+          </CardFooter>
+        </Card>
+      </Col>
     );
   };
 
@@ -63,7 +61,9 @@ const Books = (props) => {
           <h1>Search Result</h1>
         </div>
       </Row>
-      <Container>{comps}</Container>
+      <Container>
+        <Row>{comps}</Row>
+      </Container>
     </Container>
   );
 };

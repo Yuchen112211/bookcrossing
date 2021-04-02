@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Container, Row } from "reactstrap";
+import { Button, Container, Row, Pager, PagerItem } from "reactstrap";
 
 const Pagination = (props) => {
   //{ currentPage, pageSetter, pageCount }

@@ -16,6 +16,7 @@ import {
 // core components
 import Navigation from "components/Navigation/Navigation.js";
 import HomeHeader from "components/Headers/HomeHeader.js";
+import SearchHeader from "components/Headers/SearchHeader.js";
 import Footer from "components/Footer/Footer.js";
 import Pagination from "components/Pagination/Pagination.js";
 import Books from "components/Books.js";
@@ -150,7 +151,8 @@ function SendPage() {
   return (
     <>
       <Navigation />
-      <HomeHeader />
+      {!searchState && <HomeHeader />}
+      {searchState && <SearchHeader bookCount={searchData.length} />}
       <div className="wrapper">
         <div className="main">
           <div className="section section-about section-story-overview">
@@ -175,7 +177,6 @@ function SendPage() {
                 </Container>
               </>
             )}
-            {searchState}
             <Container>
               {searchState && (
                 <Pagination

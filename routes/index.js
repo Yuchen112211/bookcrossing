@@ -36,18 +36,20 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-router.post(
-  "/signin", (req, res, next) => {
-    passport.authenticate("local", function(err, user, info) {
-      if (err) {
-        return res.status(400).json({ errors: err });
-      }
-      if (!user) {
-        return res.status(400).json(info);
-      }
-      const uid = user._id.toString();
-      return res.cookie("uid", uid).status(200).json({ msg: "success", data: user});
-    })(req, res, next);
+router.post("/signin", (req, res, next) => {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return res.status(400).json({ errors: err });
+    }
+    if (!user) {
+      return res.status(400).json(info);
+    }
+    const uid = user._id.toString();
+    return res
+      .cookie("uid", uid)
+      .status(200)
+      .json({ msg: "success", data: user });
+  })(req, res, next);
 });
 
 module.exports = router;
