@@ -160,7 +160,11 @@ function SendPage() {
             {searchState && (
               <>
                 <div className="section section-about section-story-overview">
-                  <Books data={currentSearchData} pageSelected={pageSelected} />
+                  <Books
+                    sendButton={true}
+                    data={currentSearchData}
+                    pageSelected={pageSelected}
+                  />
                 </div>
                 <Container>
                   <Button

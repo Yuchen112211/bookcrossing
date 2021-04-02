@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 const Books = (props) => {
   const Book = (props) => {
     const book = props.book;
+
     return (
       <Col className="ml-auto mr-auto text-center" md="4">
         <Card>
@@ -32,18 +33,20 @@ const Books = (props) => {
             </CardText>
           </CardBody>
           <CardFooter>
-            <Button
-              block
-              onClick={() => {
-                localStorage.setItem("sentBook", JSON.stringify(book));
-              }}
-              to="/sendResult"
-              size="lg"
-              tag={Link}
-            >
-              {" "}
-              Send this book
-            </Button>
+            {props.sendButton && (
+              <Button
+                block
+                onClick={() => {
+                  localStorage.setItem("sentBook", JSON.stringify(book));
+                }}
+                to="/sendResult"
+                size="lg"
+                tag={Link}
+              >
+                {" "}
+                Send this book
+              </Button>
+            )}
           </CardFooter>
         </Card>
       </Col>
@@ -51,7 +54,7 @@ const Books = (props) => {
   };
 
   const comps = props.data.map((book) => {
-    return <Book book={book} key={book.isbn} />;
+    return <Book book={book} key={book.isbn} sendButton={props.sendButton} />;
   });
 
   return (
