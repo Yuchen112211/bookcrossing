@@ -38,7 +38,8 @@ function ProfilePageHeader(props) {
           <div className="photo-container">
             <img alt="..." src={require("assets/img/ryan.jpg").default} ></img>
           </div>
-          <h3 className="title">Ryan Scheinder</h3>
+          <h3 className="title">{props.firstName} {props.lastName}</h3>
+          <p className="category">@{props.username}</p>
           <div className="content">
             <div className="social-description">
               <h2>{props.sent}</h2>
