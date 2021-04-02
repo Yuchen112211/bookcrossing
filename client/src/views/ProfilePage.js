@@ -103,8 +103,8 @@ function Profile() {
         <Header
           key={userData.username}
           username={userData.username}
-          firstName={userData.firstName}
-          lastName={userData.lastName}
+          firstName={userData.firstname}
+          lastName={userData.lastname}
           sent={userData.sent.length}
           received={userData.received.length}
           traveling={userData.traveling.length}
