@@ -37,15 +37,13 @@ exports.selectOne = function (collection, filter = {}, callback) {
     function (err, db) {
       if (err) throw err;
       const dbo = db.db("booksharing");
-      dbo
-        .collection(collection)
-        .findOne(filter, function(err, res) {
-          if (err) {
-            throw err;
-          }
-          callback(res);
-          db.close
-        })
+      dbo.collection(collection).findOne(filter, function (err, res) {
+        if (err) {
+          throw err;
+        }
+        callback(res);
+        db.close;
+      });
     }
   );
 };
@@ -103,7 +101,6 @@ exports.update = function (collection, filter, updateDoc, options, callback) {
 };
 
 exports.getRandom = function (collection, filter = {}, callback) {
-  filter;
   client.connect(
     mongoUrl,
     { useNewUrlParser: true, useUnifiedTopology: true },
@@ -112,7 +109,10 @@ exports.getRandom = function (collection, filter = {}, callback) {
       const dbo = db.db("booksharing");
       dbo
         .collection(collection)
-        .aggregate([{ $match: filter }, { $sample: { size: 1 } }])
+        .aggregate([
+          { $match: { username: { $ne: filter.username } } },
+          { $sample: { size: 1 } },
+        ])
         .toArray(function (err, docs) {
           if (err) throw err;
           callback(docs);
