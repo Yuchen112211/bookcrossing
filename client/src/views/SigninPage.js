@@ -28,7 +28,7 @@ function SigninPage(userSetter, registerSetter) {
   const [passwordFocus, setPasswordFocus] = React.useState(false);
 
   const onLoginClicked = () => {
-    const url = "signin";
+    const url = "/api/signin";
     const body = {
       username: document.getElementById("fieldUsername").value,
       password: document.getElementById("fieldPassword").value,

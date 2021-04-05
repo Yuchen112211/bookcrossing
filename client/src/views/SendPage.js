@@ -57,7 +57,7 @@ function SendPage() {
   }, [searchData, pageSelected]);
 
   const onSearchClicked = () => {
-    const url = "books/getBook";
+    const url = "/api/books/getBook";
     const isbn = document.getElementById("bookIsbn").value;
     const title = document.getElementById("bookTitle").value;
     if (!isbn && !title) {

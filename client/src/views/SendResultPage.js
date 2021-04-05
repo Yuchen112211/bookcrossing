@@ -32,7 +32,7 @@ function SendResultPage() {
   });
 
   const getRandomUser = () => {
-    fetch("/users/getRandom", {
+    fetch("/api/users/getRandom", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function SendResultPage() {
       toId: recipient._id.toString(),
       bookId: book.bookID,
     };
-    fetch("/crossings/newSent", {
+    fetch("/api/crossings/newSent", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

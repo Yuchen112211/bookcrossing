@@ -61,7 +61,7 @@ function Profile() {
   const [pills, setPills] = React.useState(0);
 
   React.useEffect(() => {
-    const url = `/users/info/${username}`;
+    const url = `/api/users/info/${username}`;
     fetch(url, {
       method: "get",
       headers: {

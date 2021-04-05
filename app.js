@@ -26,11 +26,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, "client/build")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/books", booksRouter);
-app.use("/crossings", crossingsRouter);
+app.use("/api", indexRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/books", booksRouter);
+app.use("/api/crossings", crossingsRouter);
 
+app.get("/*", (req, res) =>
+  res.sendFile(path.resolve("client", "build", "index.html"))
+);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
