@@ -78,9 +78,8 @@ exports.insert = function (collection, obj, callback) {
       if (err) throw err;
       const dbo = db.db("booksharing");
       dbo.collection(collection).insertOne(obj, function (err) {
-        if (err) throw err;
         db.close();
-        if (callback) callback();
+        if (callback) callback(err);
       });
     }
   );

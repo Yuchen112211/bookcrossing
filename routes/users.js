@@ -11,8 +11,11 @@ router.post("/signup", function (req, res, next) {
     lastname: req.body.lastname,
     datetime: new Date(),
   };
-  db.insert("users", user, function () {
-    res.redirect("/");
+  db.insert("users", user, function (err) {
+    if (err && err.code === 11000) {
+      return res.status(400).json({ errors: "Username already exists" });
+    }
+    res.send({ msg: "success"});
   });
 });
 
@@ -31,9 +34,6 @@ router.post("/getUser", function (req, res, next) {
 });
 
 router.get("/info/:username", function (req, res, next) {
-  console.log("Cookies: ", req.cookies);
-  console.log("req.params: ", req.params);
-
   uid = req.cookies.uid;
   username = req.params.username;
 
@@ -70,7 +70,6 @@ router.get("/info/:username", function (req, res, next) {
         delete user.password;
         delete user.datetime;
         delete user._id;
-        console.log(user);
         return res.status(200).json({ msg: "success", data: user });
       }
     );
@@ -79,7 +78,7 @@ router.get("/info/:username", function (req, res, next) {
 
 router.post("/getRandom", function (req, res, next) {
   const user = {
-    username: req.body.username,
+    username: req.body.username, 
   };
   db.getRandom("users", user, function (data) {
     console.log(

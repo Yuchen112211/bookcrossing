@@ -16,6 +16,7 @@ import {
   InputGroup,
   Container,
   Col,
+  Modal,
 } from "reactstrap";
 import {
   BookHalf,
@@ -38,10 +39,10 @@ function SignupPage(props) {
   const [lastFocus, setLastFocus] = React.useState(false);
 
   const [errMsg, setErrMsg] = React.useState("");
+  const [modalOpen, setModalOpen] = React.useState(false);
   const { register, handleSubmit, errors, watch } = useForm();
 
   const onSubmit = (data) => {
-    const getUrl = "/api/users/getUser";
     const signupUrl = "/api/users/signup";
 
     const body = {
@@ -49,48 +50,28 @@ function SignupPage(props) {
       password: document.getElementById("fieldPassword").value,
       address: document.getElementById("fieldMailingAddress").value,
       firstname: document.getElementById("fieldFirstName").value,
-      lastname: document.getElementById("fieldLirstName").value,
+      lastname: document.getElementById("fieldLastName").value,
     };
-
-    fetch(getUrl, {
+    fetch(signupUrl, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username: body.username,
-      }),
+      body: JSON.stringify(body),
     })
       .then(function (response) {
+        if (response.status === 200) {
+          setModalOpen(true);
+        }
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
-          const msg = `User ${body.username} exists`;
-          setErrMsg(msg);
-          console.log(msg);
-        } else {
-          fetch(signupUrl, {
-            method: "post",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          })
-            .then(function (response) {
-              console.log("Sign up successfully");
-              setErrMsg("Sign up successfully");
-            })
-            .catch(function (error) {
-              const msg = "Unknown Error, please try again.";
-              console.log(msg);
-              setErrMsg(msg);
-            });
+        if (data.errors) {
+          setErrMsg(data.errors);
         }
       })
       .catch(function (error) {
         const msg = "Unknown issue, please try again.";
-        console.log(msg);
         setErrMsg(msg);
       });
   };
@@ -268,6 +249,29 @@ function SignupPage(props) {
             </p>
           </Container>
         </div>
+        <Modal
+          isOpen={modalOpen}
+          modalClassName="bd-example-modal-sm"
+          toggle={() => setModalOpen(false)}
+        >
+          <div className="modal-header">
+            <h3 className="modal-title" id="mySmallModalLabel">
+              Congratulation!
+            </h3>
+          </div>
+          <div className="modal-body">You have successfully signed up!</div>
+          <div className="modal-footer">
+            <Button
+              type="button"
+              className="btn"
+              color="info"
+              to="/signin"
+              tag={Link}
+            >
+              Sign in
+            </Button>
+          </div>
+        </Modal>
         <Footer />
       </div>
     </>
