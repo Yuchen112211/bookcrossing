@@ -2,20 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // reactstrap components
-import {
-  Col,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Form,
-  Input,
-  InputGroup,
-  Container,
-  Row,
-  Modal,
-  Progress,
-} from "reactstrap";
+import { Col, Button, Container, Row, Modal, Progress } from "reactstrap";
 // core components
 import Navigation from "components/Navigation/Navigation.js";
 import Footer from "components/Footer/Footer.js";
@@ -24,7 +11,10 @@ function SendPage() {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
   const [travelingCount, setTravelingCount] = React.useState(0);
-  const [crossing, setCrossing] = React.useState({crossingId: null, mailingAddress : null});
+  const [crossing, setCrossing] = React.useState({
+    crossingId: null,
+    mailingAddress: null,
+  });
 
   const onSendClicked = () => {
     const url = "/api/crossings/send";
@@ -34,22 +24,22 @@ function SendPage() {
         "Content-Type": "application/json",
       },
     })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      if (data.msg === "success") {
-        setTravelingCount(travelingCount + 1);
-        setCrossing(data.data);
-        setModalOpen(true);
-      } else if (data.errors) {
-        setErrorMsg(data.errors);
-      }
-    })
-    .catch(function (error) {
-      const msg = "Unknown issue, please try again.";
-      setErrorMsg(msg);
-    });
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.msg === "success") {
+          setTravelingCount(travelingCount + 1);
+          setCrossing(data.data);
+          setModalOpen(true);
+        } else if (data.errors) {
+          setErrorMsg(data.errors);
+        }
+      })
+      .catch(function (error) {
+        const msg = "Unknown issue, please try again.";
+        setErrorMsg(msg);
+      });
   };
 
   React.useEffect(() => {

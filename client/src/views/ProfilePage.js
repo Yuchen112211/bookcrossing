@@ -90,7 +90,7 @@ function Profile() {
       document.body.classList.remove("profile-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, []);
+  }, [pills, username]);
   return (
     <>
       <Navigation />

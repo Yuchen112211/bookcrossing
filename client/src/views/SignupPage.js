@@ -40,7 +40,7 @@ function SignupPage(props) {
 
   const [errMsg, setErrMsg] = React.useState("");
   const [modalOpen, setModalOpen] = React.useState(false);
-  const { register, handleSubmit, errors, watch } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
     const signupUrl = "/api/users/signup";

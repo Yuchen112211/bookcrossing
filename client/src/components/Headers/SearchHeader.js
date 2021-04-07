@@ -1,7 +1,7 @@
 import React from "react";
 
 // reactstrap components
-import { Col, Container, Row } from "reactstrap";
+import { Container } from "reactstrap";
 import { BookHalf } from "react-bootstrap-icons";
 
 function SearchHeader(props) {

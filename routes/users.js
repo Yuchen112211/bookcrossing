@@ -15,7 +15,7 @@ router.post("/signup", function (req, res, next) {
     if (err && err.code === 11000) {
       return res.status(400).json({ errors: "Username already exists" });
     }
-    res.send({ msg: "success"});
+    res.send({ msg: "success" });
   });
 });
 
@@ -85,13 +85,15 @@ router.get("/travelingCount", function (req, res, next) {
         count += 1;
       }
     }
-    return res.status(200).json({ msg: "success", data: {travelingCount : count} });
+    return res
+      .status(200)
+      .json({ msg: "success", data: { travelingCount: count } });
   });
 });
 
 router.post("/getRandom", function (req, res, next) {
   const user = {
-    username: req.body.username, 
+    username: req.body.username,
   };
   db.getRandom("users", user, function (data) {
     console.log(

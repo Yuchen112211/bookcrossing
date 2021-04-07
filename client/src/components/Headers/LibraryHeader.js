@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -122,7 +121,7 @@ function LibraryHeader(props) {
           </Col>
           <div>
             <p id="searchError" style={{ color: "white" }}>
-              {" "}
+              {searchError}
             </p>
           </div>
         </Container>

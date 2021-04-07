@@ -24,7 +24,6 @@ router.get("/send", function (req, res, next) {
         mailingAddress: recipent.mailingAddress,
         requestedAt: new Date(),
       };
-      console.log("crossing", crossing);
       db.insert("crossings", crossing, function () {
         delete crossing.fromId;
         delete crossing.toId;

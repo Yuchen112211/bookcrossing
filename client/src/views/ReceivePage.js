@@ -25,7 +25,6 @@ function ReceivePage() {
   const [errorMsg, setErrorMsg] = React.useState("");
 
   const onRegisterClicked = () => {
-    console.log("hello");
     const url = "/api/crossings/register";
     const body = {
       crossingId: document.getElementById("crossingId").value,
