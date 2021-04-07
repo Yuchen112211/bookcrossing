@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -12,187 +13,167 @@ import {
   InputGroup,
   Container,
   Row,
+  Modal,
+  Progress,
 } from "reactstrap";
 // core components
 import Navigation from "components/Navigation/Navigation.js";
-import HomeHeader from "components/Headers/HomeHeader.js";
-import SearchHeader from "components/Headers/SearchHeader.js";
 import Footer from "components/Footer/Footer.js";
-import Pagination from "components/Pagination/Pagination.js";
-import Books from "components/Books.js";
 
 function SendPage() {
-  const [pageCount, setPageCount] = React.useState();
-  const [pageSelected, setPage] = React.useState(1);
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const [travelingCount, setTravelingCount] = React.useState(0);
+  const [crossing, setCrossing] = React.useState({crossingId: null, mailingAddress : null});
 
-  const [searchError, setSearchError] = React.useState();
-
-  const [searchData, setSearchData] = React.useState([]);
-  const [currentSearchData, setCurrentSearchData] = React.useState();
-  const [searchState, setSearchState] = React.useState(false);
-
-  React.useEffect(() => {
-    document.body.classList.add("index-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    return function cleanup() {
-      document.body.classList.remove("index-page");
-      document.body.classList.remove("sidebar-collapse");
-    };
-  });
-
-  React.useEffect(() => {
-    const currentBooks = [];
-    searchData.forEach((book, key) => {
-      if (
-        parseInt(key) >= (pageSelected - 1) * 10 &&
-        parseInt(key) <= pageSelected * 10
-      ) {
-        currentBooks.push(book);
-      }
-    });
-    setCurrentSearchData(currentBooks);
-  }, [searchData, pageSelected]);
-
-  const onSearchClicked = () => {
-    const url = "/api/books/getBook";
-    const isbn = document.getElementById("bookIsbn").value;
-    const title = document.getElementById("bookTitle").value;
-    if (!isbn && !title) {
-      setSearchError("Must provide at least book isbn or title");
-      return;
-    }
-    var body = {};
-    if (isbn) {
-      body.isbn = isbn;
-    }
-    if (title) {
-      body.title = title;
-    }
+  const onSendClicked = () => {
+    const url = "/api/crossings/send";
     fetch(url, {
-      method: "post",
+      method: "get",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+    })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      if (data.msg === "success") {
+        setTravelingCount(travelingCount + 1);
+        setCrossing(data.data);
+        setModalOpen(true);
+      } else if (data.errors) {
+        setErrorMsg(data.errors);
+      }
+    })
+    .catch(function (error) {
+      const msg = "Unknown issue, please try again.";
+      setErrorMsg(msg);
+    });
+  };
+
+  React.useEffect(() => {
+    fetch("/api/users/travelingCount", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
         if (data.msg === "success") {
-          setPageCount(parseInt(data.data.length / 10, 10) + 1);
-          setSearchData(data.data);
-          setSearchState(true);
-        } else {
-          console.log(`Books based on ${body} does not exists`);
+          setTravelingCount(data.data.travelingCount);
+        } else if (data.errors) {
+          setErrorMsg(data.errors);
         }
+      })
+      .catch(function (error) {
+        const msg = "Unknown issue, please try again.";
+        setErrorMsg(msg);
       });
-  };
 
-  const SearchForm = () => {
-    return (
-      <>
-        <Container>
-          <Row>
-            <Col className="ml-auto mr-auto text-center" md="8">
-              <h2 className="title"> Search your book! </h2>
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Col className="ml-auto mr-auto" md="4">
-            <Card className="card-login card-plain">
-              <Form action="" className="form" method="">
-                <CardBody>
-                  <InputGroup className={"no-border input-lg"}>
-                    <Input
-                      id="bookIsbn"
-                      placeholder="Book ISBN"
-                      type="text"
-                    ></Input>
-                  </InputGroup>
-                  <InputGroup className={"no-border input-lg"}>
-                    <Input
-                      id="bookTitle"
-                      placeholder="Book title"
-                      type="text"
-                    ></Input>
-                  </InputGroup>
-                </CardBody>
-                <CardFooter className="text-center">
-                  <Button
-                    block
-                    className="btn-round btn-info"
-                    color="info"
-                    onClick={() => {
-                      onSearchClicked();
-                    }}
-                    size="lg"
-                  >
-                    Search the book
-                  </Button>
-                </CardFooter>
-              </Form>
-            </Card>
-          </Col>
-          <div>
-            <p id="searchError" style={{ color: "white" }}>
-              {searchError}
-            </p>
-          </div>
-        </Container>
-      </>
-    );
-  };
+    document.body.classList.add("login-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    return function cleanup() {
+      document.body.classList.remove("login-page");
+      document.body.classList.remove("sidebar-collapse");
+    };
+  }, []);
 
   return (
     <>
       <Navigation />
-      {!searchState && <HomeHeader />}
-      {searchState && <SearchHeader bookCount={searchData.length} />}
-      <div className="wrapper">
-        <div className="main">
-          <div className="section section-about section-story-overview">
-            {!searchState && <SearchForm />}
-            {searchState && (
-              <>
-                <div className="section section-about section-story-overview">
-                  <Books
-                    sendButton={true}
-                    data={currentSearchData}
-                    pageSelected={pageSelected}
-                  />
+      <div className="page-header">
+        <div
+          className="page-header-image"
+          style={{
+            backgroundImage:
+              "url(" + require("assets/img/header.jpg").default + ")",
+          }}
+        ></div>
+        <div className="content">
+          <Container>
+            <Row>
+              <Col className="ml-auto mr-auto text-center" md="8">
+                <h2 className="title"> Send a book </h2>
+                <div className="progress-container progress-info">
+                  <span className="progress-badge">
+                    Traveling: {travelingCount} out of 5 postcards
+                  </span>
+                  <Progress max="5" value={travelingCount}>
+                    <span className="progress-value">
+                      {5 - travelingCount} left
+                    </span>
+                  </Progress>
                 </div>
-                <Container>
-                  <Button
-                    block
-                    className="btn-round btn-info"
-                    color="info"
-                    onClick={() => {
-                      setSearchState(false);
-                    }}
-                    size="lg"
-                  >
-                    Search another
-                  </Button>
-                </Container>
-              </>
-            )}
-            <Container>
-              {searchState && (
-                <Pagination
-                  currentPage={pageSelected}
-                  pageSetter={setPage}
-                  pageCount={pageCount}
-                />
-              )}
-            </Container>
-          </div>
-          <Footer bgColor="black" />
+                <p>
+                  You will be given a Crossing ID that you must attach it on the
+                  book - the recipient will need it to register your postcard on
+                  this website.
+                </p>
+              </Col>
+            </Row>
+
+            <Col className="ml-auto mr-auto" md="4">
+              <Button
+                block
+                className="btn-round btn-info"
+                color="info"
+                size="lg"
+                onClick={onSendClicked}
+                disabled={travelingCount === 5}
+                href={travelingCount === 5}
+              >
+                Request Address
+              </Button>
+            </Col>
+            <div>
+              <p id="errorMessage" style={{ color: "red" }}>
+                {errorMsg}
+              </p>
+            </div>
+          </Container>
         </div>
+        <Modal
+          isOpen={modalOpen}
+          modalClassName="bd-example-modal-sm"
+          toggle={() => setModalOpen(false)}
+        >
+          <div className="modal-header">
+            <h3 className="modal-title" id="myModalLabel">
+              Crossing ID: {crossing.crossingId}
+            </h3>
+          </div>
+          <div className="modal-body">
+            <h5>Please send your book to the address:</h5>
+            <h5>{crossing.mailingAddress}</h5>
+            <i>Reminder: Don't forget attch the Crossing ID</i>
+          </div>
+          <div className="modal-footer">
+            <Button
+              type="button"
+              className="btn"
+              onClick={() => setModalOpen(false)}
+            >
+              Send Another One
+            </Button>
+            <Button
+              type="button"
+              className="btn"
+              color="info"
+              to="/profile"
+              tag={Link}
+            >
+              My Profile
+            </Button>
+          </div>
+        </Modal>
+        <Footer bgColor="black" />
       </div>
     </>
   );

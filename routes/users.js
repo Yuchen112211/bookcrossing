@@ -6,7 +6,7 @@ router.post("/signup", function (req, res, next) {
   const user = {
     username: req.body.username,
     password: req.body.password,
-    address: req.body.address,
+    mailingAddress: req.body.address,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     datetime: new Date(),
@@ -73,6 +73,19 @@ router.get("/info/:username", function (req, res, next) {
         return res.status(200).json({ msg: "success", data: user });
       }
     );
+  });
+});
+
+router.get("/travelingCount", function (req, res, next) {
+  uid = req.cookies.uid;
+  db.select("crossings", { fromId: uid }, function (crossings) {
+    let count = 0;
+    for (i in crossings) {
+      if (!crossings[i].receivedAt) {
+        count += 1;
+      }
+    }
+    return res.status(200).json({ msg: "success", data: {travelingCount : count} });
   });
 });
 

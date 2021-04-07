@@ -26,17 +26,16 @@ function ReceivePage() {
 
   const onRegisterClicked = () => {
     console.log("hello");
-    const url = "/api/books/register";
+    const url = "/api/crossings/register";
     const body = {
-      bookId: document.getElementById("bookId").value,
+      crossingId: document.getElementById("crossingId").value,
       message: document.getElementById("message").value,
     };
-    if (!body.bookId) {
-      const msg = `Book ID cannot be empty`;
+    if (!body.crossingId) {
+      const msg = `Crossing ID cannot be empty`;
       setErrorMsg(msg);
       return;
     }
-    setModalOpen(true);
     fetch(url, {
       method: "post",
       headers: {
@@ -51,7 +50,7 @@ function ReceivePage() {
         if (data.msg === "success") {
           setModalOpen(true);
         } else {
-          setErrorMsg("Invalid book Id.");
+          setErrorMsg("Invalid Crossing ID.");
         }
       })
       .catch(function (error) {
@@ -103,8 +102,8 @@ function ReceivePage() {
                         style={{
                           color: "white",
                         }}
-                        id="bookId"
-                        placeholder="Book ID"
+                        id="crossingId"
+                        placeholder="Crossing ID"
                         type="text"
                       ></Input>
                     </InputGroup>
