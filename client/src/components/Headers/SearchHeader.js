@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // reactstrap components
 import { Container } from "reactstrap";
 import { BookHalf } from "react-bootstrap-icons";
 
-function SearchHeader(props) {
+function SearchHeader({bookCount}) {
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -37,7 +38,7 @@ function SearchHeader(props) {
           <div className="content-center brand">
             <BookHalf size={96} />
             <h1 className="title">
-              We found {props.bookCount} books based on your search!
+              We found {bookCount} books based on your search!
             </h1>
           </div>
         </Container>
@@ -45,5 +46,9 @@ function SearchHeader(props) {
     </>
   );
 }
+
+SearchHeader.propTypes = {
+  bookCount: PropTypes.number,
+};
 
 export default SearchHeader;

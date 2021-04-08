@@ -17,7 +17,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-function Navigation(props) {
+function Navigation() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {

@@ -1,11 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // reactstrap components
 import { Container } from "reactstrap";
 
-// core components
-
-function ProfilePageHeader(props) {
+function ProfilePageHeader({
+  username,
+  firstname,
+  lastname,
+  sentCount,
+  receivedCount,
+  travelingCount,
+}) {
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -40,20 +46,20 @@ function ProfilePageHeader(props) {
             <img alt="..." src={require("assets/img/ryan.jpg").default}></img>
           </div>
           <h3 className="title">
-            {props.firstName} {props.lastName}
+            {firstname} {lastname}
           </h3>
-          <p className="category">@{props.username}</p>
+          <p className="category">@{username}</p>
           <div className="content">
             <div className="social-description">
-              <h2>{props.sent}</h2>
+              <h2>{sentCount}</h2>
               <p>Sent</p>
             </div>
             <div className="social-description">
-              <h2>{props.received}</h2>
+              <h2>{receivedCount}</h2>
               <p>Received</p>
             </div>
             <div className="social-description">
-              <h2>{props.traveling}</h2>
+              <h2>{travelingCount}</h2>
               <p>Traveling</p>
             </div>
           </div>
@@ -62,5 +68,14 @@ function ProfilePageHeader(props) {
     </>
   );
 }
+
+ProfilePageHeader.propTypes = {
+  username: PropTypes.string,
+  firstname: PropTypes.string,
+  lastname: PropTypes.string,
+  sentCount: PropTypes.number,
+  receivedCount: PropTypes.number,
+  travelingCount: PropTypes.number,
+};
 
 export default ProfilePageHeader;

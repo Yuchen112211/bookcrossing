@@ -1,16 +1,14 @@
 /*eslint-disable*/
 import React from "react";
+import PropTypes from "prop-types";
 
 // reactstrap components
 import { Container } from "reactstrap";
 import { Github } from "react-bootstrap-icons";
 
-function Footer(props) {
+function Footer({ bgColor }) {
   return (
-    <footer
-      className="footer"
-      data-background-color={props.bgColor ? props.bgColor : null}
-    >
+    <footer className="footer" data-background-color={bgColor ? bgColor : null}>
       <Container>
         <nav>
           <ul>
@@ -40,5 +38,9 @@ function Footer(props) {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  bgColor: PropTypes.string,
+};
 
 export default Footer;

@@ -164,11 +164,11 @@ function Profile() {
         <Header
           key={userData.username}
           username={userData.username}
-          firstName={userData.firstname}
-          lastName={userData.lastname}
-          sent={userData.sent.length}
-          received={userData.received.length}
-          traveling={userData.traveling.length}
+          firstname={userData.firstname}
+          lastname={userData.lastname}
+          sentCount={userData.sent.length}
+          receivedCount={userData.received.length}
+          travelingCount={userData.traveling.length}
         />
         <div className="section">
           <Container>
