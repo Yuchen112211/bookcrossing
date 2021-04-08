@@ -154,7 +154,9 @@ function Profile() {
       document.body.classList.remove("profile-page");
       document.body.classList.remove("sidebar-collapse");
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
   return (
     <>
       <Navigation />
