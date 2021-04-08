@@ -6,7 +6,6 @@ import {
   useRouteMatch,
   useParams,
 } from "react-router-dom";
-import { Envelope, Pencil } from "react-bootstrap-icons";
 
 // reactstrap components
 import {
@@ -20,7 +19,13 @@ import {
   NavLink,
   TabContent,
   TabPane,
+  Modal,
+  Form,
+  FormGroup,
+  Input,
+  Label,
 } from "reactstrap";
+import { Envelope, Pencil } from "react-bootstrap-icons";
 
 // core components
 import Navigation from "components/Navigation/Navigation.js";
@@ -46,6 +51,8 @@ function ProfilePage() {
 
 function Profile() {
   const { username } = useParams();
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [errMsg, setErrMsg] = React.useState("");
   const [userData, setUserData] = React.useState({
     username: username,
     sent: [],
@@ -54,6 +61,62 @@ function Profile() {
   });
   const [currentList, setCurrentList] = React.useState([]);
   const [pills, setPills] = React.useState(0);
+
+  const onUpdateClicked = () => {
+    setErrMsg("");
+    console.log("userData", userData);
+    const url = "/api/users/update";
+    const body = {
+      firstname: document.getElementById("fieldFirstname").value,
+      lastname: document.getElementById("fieldLastname").value,
+      mailingAddress: document.getElementById("fieldMailingAddress").value,
+      about: document.getElementById("fieldAbout").value,
+      instagram: document.getElementById("fieldInstagram").value,
+      twitter: document.getElementById("fieldTwitter").value,
+    };
+    console.log("body", body);
+    if (!body.firstname || body.firstname.length === 0) {
+      setErrMsg("First name cannot be empty");
+      return;
+    }
+    if (!body.lastname || body.lastname.length === 0) {
+      setErrMsg("Last name cannot be empty");
+      return;
+    }
+    if (!body.mailingAddress || body.mailingAddress.length === 0) {
+      setErrMsg("Mailing address cannot be empty");
+      return;
+    }
+    if (!body.about || body.about.length === 0) {
+      delete body.about;
+    }
+    if (!body.instagram || body.instagram.length === 0) {
+      delete body.instagram;
+    }
+    if (!body.twitter || body.twitter.length === 0) {
+      delete body.twitter;
+    }
+    console.log("body", body);
+    fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (data.msg === "success") {
+          window.location.reload();
+        }
+      })
+      .catch(function (error) {
+        const msg = "Unknown issue, please try again.";
+        setErrMsg(msg);
+      });
+  };
 
   React.useEffect(() => {
     const url = `/api/users/info/${username}`;
@@ -76,6 +139,7 @@ function Profile() {
             setCurrentList(data.data.traveling);
           }
           setUserData(data.data);
+          console.log(userData);
         }
       })
       .catch(function (error) {
@@ -90,7 +154,7 @@ function Profile() {
       document.body.classList.remove("profile-page");
       document.body.classList.remove("sidebar-collapse");
     };
-  }, [pills, username]);
+  }, []);
   return (
     <>
       <Navigation />
@@ -108,7 +172,15 @@ function Profile() {
           <Container>
             <div className="button-container">
               {username === userData.username ? (
-                <Button className="btn-round" color="info" size="lg">
+                <Button
+                  className="btn-round"
+                  color="info"
+                  size="lg"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setModalOpen(true);
+                  }}
+                >
                   <Pencil /> Edit Profile
                 </Button>
               ) : (
@@ -228,6 +300,91 @@ function Profile() {
             <InventoryTable list={currentList} />
           </Container>
         </div>
+        {username === userData.username ? (
+          <Modal
+            isOpen={modalOpen}
+            modalClassName="bd-example-modal-sm"
+            toggle={() => setModalOpen(false)}
+          >
+            <div className="modal-header">
+              <h3 className="modal-title" id="myModalLabel">
+                Edit Profile
+              </h3>
+            </div>
+            <div className="modal-body">
+              <Form action="" className="form" method="POST">
+                <FormGroup>
+                  <Label for="fieldFirstname">First Name</Label>
+                  <Input
+                    id="fieldFirstname"
+                    type="text"
+                    defaultValue={userData.firstname}
+                  ></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="fieldLastname">Last Name</Label>
+                  <Input
+                    id="fieldLastname"
+                    type="text"
+                    defaultValue={userData.lastname}
+                  ></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="fieldMailingAddress">Mailing Address</Label>
+                  <Input
+                    id="fieldMailingAddress"
+                    type="text"
+                    defaultValue={userData.mailingAddress}
+                  ></Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="fieldAbout">About</Label>
+                  <Input
+                    id="fieldAbout"
+                    rows="3"
+                    type="textarea"
+                    defaultValue={userData.about}
+                  >
+                    {userData.about}
+                  </Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="fieldInstagram">Instagram</Label>
+                  <Input
+                    id="fieldInstagram"
+                    type="text"
+                    defaultValue={userData.instagram}
+                  >
+                    {userData.instagram}
+                  </Input>
+                </FormGroup>
+                <FormGroup>
+                  <Label for="fieldTwitter">Twitter</Label>
+                  <Input
+                    id="fieldTwitter"
+                    type="text"
+                    defaultValue={userData.twitter}
+                  >
+                    {userData.twitter}
+                  </Input>
+                </FormGroup>
+                <Button
+                  block
+                  className="btn-round btn-info"
+                  color="info"
+                  size="lg"
+                  onClick={onUpdateClicked}
+                >
+                  Update
+                </Button>
+              </Form>
+              <p id="error" style={{ color: "red" }}>
+                {errMsg}
+              </p>
+            </div>
+          </Modal>
+        ) : null}
+
         <Footer bgColor="black" />
       </div>
     </>

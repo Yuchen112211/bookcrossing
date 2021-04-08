@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const db = require("../db");
+const ObjectId = require("mongodb").ObjectID;
 
 router.post("/signup", function (req, res, next) {
   const user = {
@@ -34,7 +35,7 @@ router.post("/getUser", function (req, res, next) {
 });
 
 router.get("/info/:username", function (req, res, next) {
-  uid = req.cookies.uid;
+  const uid = req.cookies.uid;
   username = req.params.username;
 
   db.selectOne("users", { username: username }, function (user) {
@@ -63,8 +64,7 @@ router.get("/info/:username", function (req, res, next) {
           delete crossings[i].fromId;
           delete crossings[i].toId;
         }
-        if (uid === userId) {
-        } else {
+        if (uid !== userId) {
           delete user.mailingAddress;
         }
         delete user.password;
@@ -101,6 +101,21 @@ router.post("/getRandom", function (req, res, next) {
     );
     res.send({ msg: "success", data: data });
   });
+});
+
+router.post("/update", function (req, res, next) {
+  const uid = req.cookies.uid;
+  const fields = req.body;
+  console.log("fields", fields);
+  db.update(
+    "users",
+    { _id: ObjectId(uid) },
+    { $set: fields },
+    {},
+    function () {
+      res.send({ msg: "success" });
+    }
+  );
 });
 
 module.exports = router;
