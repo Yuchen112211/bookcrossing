@@ -1,5 +1,5 @@
 // mongodb database wrapper
-const mongo = require("mongodb");
+const mongo = require('mongodb');
 const client = mongo.MongoClient;
 
 const mongoUrl = process.env.DB_URL;
@@ -11,14 +11,14 @@ exports.getObjectId = function (id) {
 exports.selectAll = function (collection, callback) {
   client.connect(
     mongoUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    {useNewUrlParser: true, useUnifiedTopology: true},
     function (err, db) {
       if (err) throw err;
-      const dbo = db.db("booksharing");
+      const dbo = db.db('booksharing');
       dbo
         .collection(collection)
         .find({})
-        .sort({ datetime: -1 })
+        .sort({datetime: -1})
         .toArray(function (err, docs) {
           if (err) {
             throw err;
@@ -33,10 +33,10 @@ exports.selectAll = function (collection, callback) {
 exports.selectOne = function (collection, filter = {}, callback) {
   client.connect(
     mongoUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    {useNewUrlParser: true, useUnifiedTopology: true},
     function (err, db) {
       if (err) throw err;
-      const dbo = db.db("booksharing");
+      const dbo = db.db('booksharing');
       dbo.collection(collection).findOne(filter, function (err, res) {
         if (err) {
           throw err;
@@ -51,14 +51,14 @@ exports.selectOne = function (collection, filter = {}, callback) {
 exports.select = function (collection, filter = {}, callback) {
   client.connect(
     mongoUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    {useNewUrlParser: true, useUnifiedTopology: true},
     function (err, db) {
       if (err) throw err;
-      const dbo = db.db("booksharing");
+      const dbo = db.db('booksharing');
       dbo
         .collection(collection)
         .find(filter)
-        .sort({ datetime: -1 })
+        .sort({datetime: -1})
         .toArray(function (err, docs) {
           if (err) {
             throw err;
@@ -73,10 +73,10 @@ exports.select = function (collection, filter = {}, callback) {
 exports.insert = function (collection, obj, callback) {
   client.connect(
     mongoUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    {useNewUrlParser: true, useUnifiedTopology: true},
     function (err, db) {
       if (err) throw err;
-      const dbo = db.db("booksharing");
+      const dbo = db.db('booksharing');
       dbo.collection(collection).insertOne(obj, function (err) {
         db.close();
         if (callback) callback(err);
@@ -88,10 +88,10 @@ exports.insert = function (collection, obj, callback) {
 exports.update = function (collection, filter, updateDoc, options, callback) {
   client.connect(
     mongoUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    {useNewUrlParser: true, useUnifiedTopology: true},
     async function (err, db) {
       if (err) throw err;
-      const dbo = db.db("booksharing");
+      const dbo = db.db('booksharing');
       await dbo.collection(collection).updateOne(filter, updateDoc, options);
       db.close();
       if (callback) callback();
@@ -102,15 +102,15 @@ exports.update = function (collection, filter, updateDoc, options, callback) {
 exports.getRandom = function (collection, filter = {}, callback) {
   client.connect(
     mongoUrl,
-    { useNewUrlParser: true, useUnifiedTopology: true },
+    {useNewUrlParser: true, useUnifiedTopology: true},
     function (err, db) {
       if (err) throw err;
-      const dbo = db.db("booksharing");
+      const dbo = db.db('booksharing');
       dbo
         .collection(collection)
         .aggregate([
-          { $match: { username: { $ne: filter.username } } },
-          { $sample: { size: 1 } },
+          {$match: {username: {$ne: filter.username}}},
+          {$sample: {size: 1}},
         ])
         .toArray(function (err, docs) {
           if (err) throw err;

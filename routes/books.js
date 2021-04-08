@@ -1,9 +1,10 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
 const db = require("../db");
 
+const router = new express.Router();
+
 router.post("/getBook", function (req, res, next) {
-  var filter = {};
+  const filter = {};
   if (req.body.isbn) {
     filter.isbn = new RegExp(req.body.isbn);
   }

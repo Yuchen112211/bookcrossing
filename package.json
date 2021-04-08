@@ -23,6 +23,9 @@
   "description": "",
   "main": "app.js",
   "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.1.0",
     "nodemon": "^2.0.7"
   },
   "repository": {

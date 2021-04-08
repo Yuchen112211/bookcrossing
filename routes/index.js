@@ -1,9 +1,10 @@
-var express = require("express");
-var router = express.Router();
-const db = require("../db");
+const express = require('express');
+const db = require('../db');
 
-var passport = require("passport"),
-  LocalStrategy = require("passport-local").Strategy;
+const router = new express.Router();
+
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -19,12 +20,12 @@ passport.use(
       username: username,
       password: password,
     };
-    db.selectOne("users", user, function (user) {
+    db.selectOne('users', user, function (user) {
       if (user) {
         return done(null, user);
       } else {
         return done(null, false, {
-          message: "This combination of username/password does not exist",
+          message: 'This combination of username/password does not exist',
         });
       }
     });
@@ -32,23 +33,23 @@ passport.use(
 );
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+router.get('/', function (req, res, next) {
+  res.render('index', {title: 'Express'});
 });
 
-router.post("/signin", (req, res, next) => {
-  passport.authenticate("local", function (err, user, info) {
+router.post('/signin', (req, res, next) => {
+  passport.authenticate('local', function (err, user, info) {
     if (err) {
-      return res.status(400).json({ errors: err });
+      return res.status(400).json({errors: err});
     }
     if (!user) {
       return res.status(400).json(info);
     }
     const uid = user._id.toString();
     return res
-      .cookie("uid", uid)
+      .cookie('uid', uid)
       .status(200)
-      .json({ msg: "success", data: user });
+      .json({msg: 'success', data: user});
   })(req, res, next);
 });
 

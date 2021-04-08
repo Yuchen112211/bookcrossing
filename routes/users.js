@@ -1,9 +1,10 @@
-var express = require("express");
-var router = express.Router();
-const db = require("../db");
-const ObjectId = require("mongodb").ObjectID;
+const express = require('express');
+const db = require('../db');
+const ObjectId = require('mongodb').ObjectID;
 
-router.post("/signup", function (req, res, next) {
+const router = new express.Router();
+
+router.post('/signup', function (req, res, next) {
   const user = {
     username: req.body.username,
     password: req.body.password,
@@ -12,45 +13,45 @@ router.post("/signup", function (req, res, next) {
     lastname: req.body.lastname,
     datetime: new Date(),
   };
-  db.insert("users", user, function (err) {
+  db.insert('users', user, function (err) {
     if (err && err.code === 11000) {
-      return res.status(400).json({ errors: "Username already exists" });
+      return res.status(400).json({errors: 'Username already exists'});
     }
-    res.send({ msg: "success" });
+    res.send({msg: 'success'});
   });
 });
 
-router.post("/getUser", function (req, res, next) {
+router.post('/getUser', function (req, res, next) {
   const user = {
     username: req.body.username,
     password: req.body.password,
   };
-  db.select("users", user, function (data) {
+  db.select('users', user, function (data) {
     if (data.length == 1) {
-      res.send({ msg: "success", data: data });
+      res.send({msg: 'success', data: data});
     } else {
-      res.send({ msg: "Not exists" });
+      res.send({msg: 'Not exists'});
     }
   });
 });
 
-router.get("/info/:username", function (req, res, next) {
+router.get('/info/:username', function (req, res, next) {
   const uid = req.cookies.uid;
-  username = req.params.username;
+  const username = req.params.username;
 
-  db.selectOne("users", { username: username }, function (user) {
+  db.selectOne('users', {username: username}, function (user) {
     if (!user) {
-      return res.status(404).json({ msg: "user not found" });
+      return res.status(404).json({msg: 'user not found'});
     }
     user.sent = [];
     user.received = [];
     user.traveling = [];
-    userId = user._id.toString();
+    const userId = user._id.toString();
     db.select(
-      "crossings",
-      { $or: [{ fromId: userId }, { toId: userId }] },
+      'crossings',
+      {$or: [{fromId: userId}, {toId: userId}]},
       function (crossings) {
-        for (i in crossings) {
+        for (let i = 0; i < crossings.length; i++) {
           if (crossings[i].fromId === userId) {
             if (crossings[i].receivedAt) {
               user.sent.push(crossings[i]);
@@ -70,52 +71,46 @@ router.get("/info/:username", function (req, res, next) {
         delete user.password;
         delete user.datetime;
         delete user._id;
-        return res.status(200).json({ msg: "success", data: user });
+        return res.status(200).json({msg: 'success', data: user});
       }
     );
   });
 });
 
-router.get("/travelingCount", function (req, res, next) {
-  uid = req.cookies.uid;
-  db.select("crossings", { fromId: uid }, function (crossings) {
+router.get('/travelingCount', function (req, res, next) {
+  const uid = req.cookies.uid;
+  db.select('crossings', {fromId: uid}, function (crossings) {
     let count = 0;
-    for (i in crossings) {
+    for (let i = 0; i < crossings.length; i++) {
       if (!crossings[i].receivedAt) {
         count += 1;
       }
     }
     return res
       .status(200)
-      .json({ msg: "success", data: { travelingCount: count } });
+      .json({msg: 'success', data: {travelingCount: count}});
   });
 });
 
-router.post("/getRandom", function (req, res, next) {
+router.post('/getRandom', function (req, res, next) {
   const user = {
     username: req.body.username,
   };
-  db.getRandom("users", user, function (data) {
+  db.getRandom('users', user, function (data) {
     console.log(
       `Got Random user: ${data[0].username} with address: ${data[0].mailing_address}`
     );
-    res.send({ msg: "success", data: data });
+    res.send({msg: 'success', data: data});
   });
 });
 
-router.post("/update", function (req, res, next) {
+router.post('/update', function (req, res, next) {
   const uid = req.cookies.uid;
   const fields = req.body;
-  console.log("fields", fields);
-  db.update(
-    "users",
-    { _id: ObjectId(uid) },
-    { $set: fields },
-    {},
-    function () {
-      res.send({ msg: "success" });
-    }
-  );
+  console.log('fields', fields);
+  db.update('users', {_id: new ObjectId(uid)}, {$set: fields}, {}, function () {
+    res.send({msg: 'success'});
+  });
 });
 
 module.exports = router;
