@@ -130,8 +130,12 @@ function SignupPage(props) {
                         onFocus={() => setUsernameFocus(true)}
                         onBlur={() => setUsernameFocus(false)}
                         pattern="[A-Za-z0-9]{6,}"
-                        ref={register({ required: "Username required!" })}
-                      ></Input>
+                        ref={register}
+                        required
+                        title="Username should contains at least 6 characters with only letters and numbers"
+                      >
+                        >
+                      </Input>
                       {errors.username && (
                         <p id="usernameError" style={{ color: "red" }}>
                           {errors.username.message}
@@ -156,7 +160,9 @@ function SignupPage(props) {
                         onFocus={() => setPasswordFocus(true)}
                         onBlur={() => setPasswordFocus(false)}
                         pattern=".{8,}"
-                        ref={register({ required: "Password required!" })}
+                        ref={register}
+                        required
+                        title="Password need to contain at least eight characters"
                       ></Input>
                       {errors.password && (
                         <p id="passwordError" style={{ color: "red" }}>
@@ -181,9 +187,8 @@ function SignupPage(props) {
                         type="text"
                         onFocus={() => setAddressFocus(true)}
                         onBlur={() => setAddressFocus(false)}
-                        ref={register({
-                          required: "Mailing address required!",
-                        })}
+                        ref={register}
+                        required
                       ></Input>
                     </InputGroup>
                     <InputGroup
