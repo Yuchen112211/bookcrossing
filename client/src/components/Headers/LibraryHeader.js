@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // reactstrap components
 import {
@@ -16,7 +17,7 @@ import {
 } from 'reactstrap';
 // import { BookHalf } from "react-bootstrap-icons";
 
-function LibraryHeader(props) {
+function LibraryHeader({setPageCount, setSearchData, setSearchState}) {
   const [searchError, setSearchError] = React.useState('');
 
   const pageHeader = React.createRef();
@@ -61,9 +62,9 @@ function LibraryHeader(props) {
       })
       .then(function (data) {
         if (data.msg === 'success') {
-          props.setPageCount(parseInt(data.data.length / 10, 10) + 1);
-          props.setSearchData(data.data);
-          props.setSearchState(true);
+          setPageCount(parseInt(data.data.length / 10, 10) + 1);
+          setSearchData(data.data);
+          setSearchState(true);
         } else {
           console.log(`Books based on ${body} does not exists`);
         }
@@ -147,5 +148,11 @@ function LibraryHeader(props) {
     </>
   );
 }
+
+LibraryHeader.propTypes = {
+  setPageCount: PropTypes.func.isRequired,
+  setSearchData: PropTypes.func.isRequired,
+  setSearchState: PropTypes.func.isRequired,
+};
 
 export default LibraryHeader;

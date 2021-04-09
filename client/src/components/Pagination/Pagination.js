@@ -1,32 +1,32 @@
 /* eslint-disable */
-import React from "react";
-import PropTypes from "prop-types";
-import { Button, Container, Row } from "reactstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Button, Container, Row} from 'reactstrap';
 
-const Pagination = (props) => {
+const Pagination = ({currentPage, pageCount, pageSetter}) => {
   //{ currentPage, pageSetter, pageCount }
   const pages = () => {
     var indexes = [];
 
-    if (props.currentPage > 5) {
-      indexes.push("...");
+    if (currentPage > 5) {
+      indexes.push('...');
     }
     for (
-      var i = Math.max(1, props.currentPage - 4);
-      i < Math.min(props.pageCount + 1, props.currentPage + 5);
+      var i = Math.max(1, currentPage - 4);
+      i < Math.min(pageCount + 1, currentPage + 5);
       i++
     ) {
       indexes.push(i);
     }
-    if (props.pageCount + 1 > props.currentPage + 5) {
-      indexes.push("...");
+    if (pageCount + 1 > currentPage + 5) {
+      indexes.push('...');
     }
     return indexes.map((val, index) => (
       <b key={index}>
         {Number.isInteger(val) && (
           <Button
             onClick={() => {
-              props.pageSetter(val);
+              pageSetter(val);
             }}
           >
             {val}
@@ -43,8 +43,8 @@ const Pagination = (props) => {
         <Row>
           <Button
             onClick={() => {
-              if (props.currentPage > 0) {
-                props.pageSetter(1);
+              if (currentPage > 0) {
+                pageSetter(1);
               }
             }}
           >
@@ -52,8 +52,8 @@ const Pagination = (props) => {
           </Button>
           <Button
             onClick={() => {
-              if (props.currentPage > 1) {
-                props.pageSetter(props.currentPage - 1);
+              if (currentPage > 1) {
+                pageSetter(currentPage - 1);
               }
             }}
           >
@@ -62,8 +62,8 @@ const Pagination = (props) => {
           {pages()}
           <Button
             onClick={() => {
-              if (props.currentPage < props.pageCount) {
-                props.pageSetter(props.currentPage + 1);
+              if (currentPage < pageCount) {
+                pageSetter(currentPage + 1);
               }
             }}
           >
@@ -71,8 +71,8 @@ const Pagination = (props) => {
           </Button>
           <Button
             onClick={() => {
-              if (props.currentPage < props.pageCount) {
-                props.pageSetter(props.pageCount);
+              if (currentPage < pageCount) {
+                pageSetter(pageCount);
               }
             }}
           >
@@ -86,6 +86,8 @@ const Pagination = (props) => {
 
 Pagination.propTypes = {
   pageCount: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  pageSetter: PropTypes.func.isRequired,
 };
 
 export default Pagination;
