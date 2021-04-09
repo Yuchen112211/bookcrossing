@@ -1,33 +1,33 @@
-import React from "react";
+import React from 'react';
 
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import {Container, Row, Col} from 'reactstrap';
 
 // core components
-import Navigation from "components/Navigation/Navigation.js";
-import WelcomeHeader from "components/Headers/WelcomeHeader.js";
-import HomeHeader from "components/Headers/HomeHeader.js";
-import Footer from "components/Footer/Footer.js";
+import Navigation from 'components/Navigation/Navigation.js';
+import WelcomeHeader from 'components/Headers/WelcomeHeader.js';
+import HomeHeader from 'components/Headers/HomeHeader.js';
+import Footer from 'components/Footer/Footer.js';
 
 function Home() {
   const [signedIn, setSignedIn] = React.useState(false);
 
   React.useEffect(() => {
-    document.body.classList.add("index-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('index-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("index-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('index-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   });
   return (
     <>
       <Navigation signedIn={signedIn} setSignedIn={setSignedIn} />
       <div className="wrapper">
-        {localStorage.getItem("loggedin") ? <HomeHeader /> : <WelcomeHeader />}
+        {localStorage.getItem('loggedin') ? <HomeHeader /> : <WelcomeHeader />}
         <div className="main">
           <div className="section section-about section-story-overview">
             <Container>
@@ -35,11 +35,11 @@ function Home() {
                 <Col className="ml-auto mr-auto text-center" md="8">
                   <h2 className="title">What is Bookcrossing?</h2>
                   <h5 className="blockquote">
-                    It's a project that allows you to send books and receive
-                    books back from random people. Here you can send a book to a
-                    total random book lover, and receiving books from others!
-                    Let's explore the true emotion and culture written into
-                    words, grasp the wisdom of the human race.
+                    It&apos;s a project that allows you to send books and
+                    receive books back from random people. Here you can send a
+                    book to a total random book lover, and receiving books from
+                    others! Let&apos;s explore the true emotion and culture
+                    written into words, grasp the wisdom of the human race.
                   </h5>
                 </Col>
               </Row>
@@ -54,9 +54,9 @@ function Home() {
                     className="image-container image-left"
                     style={{
                       backgroundImage:
-                        "url(" +
-                        require("assets/img/how-does-it-work.png").default +
-                        ")",
+                        'url(' +
+                        require('assets/img/how-does-it-work.png').default +
+                        ')',
                     }}
                   ></div>
                 </Col>

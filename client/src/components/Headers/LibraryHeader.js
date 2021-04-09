@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable */
+import React from 'react';
 
 // reactstrap components
 import {
@@ -12,36 +13,36 @@ import {
   Form,
   Input,
   InputGroup,
-} from "reactstrap";
+} from 'reactstrap';
 // import { BookHalf } from "react-bootstrap-icons";
 
 function LibraryHeader(props) {
-  const [searchError, setSearchError] = React.useState("");
+  const [searchError, setSearchError] = React.useState('');
 
-  let pageHeader = React.createRef();
+  const pageHeader = React.createRef();
   React.useEffect(() => {
     if (window.innerWidth > 1991) {
       const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
+        const windowScrollTop = window.pageYOffset / 3;
         pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
+          'translate3d(0,' + windowScrollTop + 'px,0)';
       };
-      window.addEventListener("scroll", updateScroll);
+      window.addEventListener('scroll', updateScroll);
       return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
+        window.removeEventListener('scroll', updateScroll);
       };
     }
   });
 
   const onSearchClicked = () => {
-    const url = "/api/books/getBook";
-    const isbn = document.getElementById("bookIsbn").value;
-    const title = document.getElementById("bookTitle").value;
+    const url = '/api/books/getBook';
+    const isbn = document.getElementById('bookIsbn').value;
+    const title = document.getElementById('bookTitle').value;
     if (!isbn && !title) {
-      setSearchError("Must provide at least book isbn or title");
+      setSearchError('Must provide at least book isbn or title');
       return;
     }
-    var body = {};
+    const body = {};
     if (isbn) {
       body.isbn = isbn;
     }
@@ -49,9 +50,9 @@ function LibraryHeader(props) {
       body.title = title;
     }
     fetch(url, {
-      method: "post",
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
@@ -59,7 +60,7 @@ function LibraryHeader(props) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           props.setPageCount(parseInt(data.data.length / 10, 10) + 1);
           props.setSearchData(data.data);
           props.setSearchState(true);
@@ -82,20 +83,20 @@ function LibraryHeader(props) {
             <Card className="card-login card-plain">
               <Form action="" className="form" method="">
                 <CardBody>
-                  <InputGroup className={"no-border input-lg"}>
+                  <InputGroup className={'no-border input-lg'}>
                     <Input
                       style={{
-                        color: "white",
+                        color: 'white',
                       }}
                       id="bookIsbn"
                       placeholder="Book ISBN"
                       type="text"
                     ></Input>
                   </InputGroup>
-                  <InputGroup className={"no-border input-lg"}>
+                  <InputGroup className={'no-border input-lg'}>
                     <Input
                       style={{
-                        color: "white",
+                        color: 'white',
                       }}
                       id="bookTitle"
                       placeholder="Book title"
@@ -120,7 +121,7 @@ function LibraryHeader(props) {
             </Card>
           </Col>
           <div>
-            <p id="searchError" style={{ color: "white" }}>
+            <p id="searchError" style={{color: 'white'}}>
               {searchError}
             </p>
           </div>
@@ -136,7 +137,7 @@ function LibraryHeader(props) {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/header.jpg").default + ")",
+              'url(' + require('assets/img/header.jpg').default + ')',
           }}
           ref={pageHeader}
         ></div>

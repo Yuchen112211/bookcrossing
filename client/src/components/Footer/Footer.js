@@ -1,12 +1,12 @@
 /*eslint-disable*/
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // reactstrap components
-import { Container } from "reactstrap";
-import { Github } from "react-bootstrap-icons";
+import {Container} from 'reactstrap';
+import {Github} from 'react-bootstrap-icons';
 
-function Footer({ bgColor }) {
+function Footer({bgColor}) {
   return (
     <footer className="footer" data-background-color={bgColor ? bgColor : null}>
       <Container>
@@ -24,11 +24,11 @@ function Footer({ bgColor }) {
         </nav>
         When you learn, teach, when you get, give. -<i>Maya Angelou</i>
         <div className="copyright" id="copyright">
-          © {new Date().getFullYear()}, Built by{" "}
+          © {new Date().getFullYear()}, Built by{' '}
           <a href="" target="_blank">
             Yuchen
-          </a>{" "}
-          &amp;{" "}
+          </a>{' '}
+          &amp;{' '}
           <a href="https://www.instagram.com/zeft.t/" target="_blank">
             Zhi
           </a>

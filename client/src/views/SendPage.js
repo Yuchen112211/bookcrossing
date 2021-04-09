@@ -1,15 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 // reactstrap components
-import { Col, Button, Container, Row, Modal, Progress } from "reactstrap";
+import {Col, Button, Container, Row, Modal, Progress} from 'reactstrap';
 // core components
-import Navigation from "components/Navigation/Navigation.js";
-import Footer from "components/Footer/Footer.js";
+import Navigation from 'components/Navigation/Navigation.js';
+import Footer from 'components/Footer/Footer.js';
 
 function SendPage() {
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [errorMsg, setErrorMsg] = React.useState("");
+  const [errorMsg, setErrorMsg] = React.useState('');
   const [travelingCount, setTravelingCount] = React.useState(0);
   const [crossing, setCrossing] = React.useState({
     crossingId: null,
@@ -17,18 +17,18 @@ function SendPage() {
   });
 
   const onSendClicked = () => {
-    const url = "/api/crossings/send";
+    const url = '/api/crossings/send';
     fetch(url, {
-      method: "get",
+      method: 'get',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           setTravelingCount(travelingCount + 1);
           setCrossing(data.data);
           setModalOpen(true);
@@ -37,41 +37,41 @@ function SendPage() {
         }
       })
       .catch(function (error) {
-        const msg = "Unknown issue, please try again.";
+        const msg = 'Unknown issue, please try again.';
         setErrorMsg(msg);
       });
   };
 
   React.useEffect(() => {
-    fetch("/api/users/travelingCount", {
-      method: "get",
+    fetch('/api/users/travelingCount', {
+      method: 'get',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           setTravelingCount(data.data.travelingCount);
         } else if (data.errors) {
           setErrorMsg(data.errors);
         }
       })
       .catch(function (error) {
-        const msg = "Unknown issue, please try again.";
+        const msg = 'Unknown issue, please try again.';
         setErrorMsg(msg);
       });
 
-    document.body.classList.add("login-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('login-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("login-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('login-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   }, []);
 
@@ -83,7 +83,7 @@ function SendPage() {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/header.jpg").default + ")",
+              'url(' + require('assets/img/header.jpg').default + ')',
           }}
         ></div>
         <div className="content">
@@ -123,7 +123,7 @@ function SendPage() {
               </Button>
             </Col>
             <div>
-              <p id="errorMessage" style={{ color: "red" }}>
+              <p id="errorMessage" style={{color: 'red'}}>
                 {errorMsg}
               </p>
             </div>
@@ -142,7 +142,7 @@ function SendPage() {
           <div className="modal-body">
             <h5>Please send your book to the address:</h5>
             <h5>{crossing.mailingAddress}</h5>
-            <i>Reminder: Don't forget attch the Crossing ID</i>
+            <i>Reminder: Do not forget attch the Crossing ID</i>
           </div>
           <div className="modal-footer">
             <Button

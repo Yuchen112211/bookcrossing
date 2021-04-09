@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // reactstrap components
-import { Container } from "reactstrap";
+import {Container} from 'reactstrap';
 
 function ProfilePageHeader({
   username,
@@ -12,18 +12,18 @@ function ProfilePageHeader({
   receivedCount,
   travelingCount,
 }) {
-  let pageHeader = React.createRef();
+  const pageHeader = React.createRef();
 
   React.useEffect(() => {
     if (window.innerWidth > 991) {
       const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
+        const windowScrollTop = window.pageYOffset / 3;
         pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
+          'translate3d(0,' + windowScrollTop + 'px,0)';
       };
-      window.addEventListener("scroll", updateScroll);
+      window.addEventListener('scroll', updateScroll);
       return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
+        window.removeEventListener('scroll', updateScroll);
       };
     }
   });
@@ -37,13 +37,13 @@ function ProfilePageHeader({
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/bg5.jpg").default + ")",
+              'url(' + require('assets/img/bg5.jpg').default + ')',
           }}
           ref={pageHeader}
         ></div>
         <Container>
           <div className="photo-container">
-            <img alt="..." src={require("assets/img/ryan.jpg").default}></img>
+            <img alt="..." src={require('assets/img/ryan.jpg').default}></img>
           </div>
           <h3 className="title">
             {firstname} {lastname}
@@ -70,12 +70,12 @@ function ProfilePageHeader({
 }
 
 ProfilePageHeader.propTypes = {
-  username: PropTypes.string,
-  firstname: PropTypes.string,
-  lastname: PropTypes.string,
-  sentCount: PropTypes.number,
-  receivedCount: PropTypes.number,
-  travelingCount: PropTypes.number,
+  username: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
+  sentCount: PropTypes.number.isRequired,
+  receivedCount: PropTypes.number.isRequired,
+  travelingCount: PropTypes.number.isRequired,
 };
 
 export default ProfilePageHeader;

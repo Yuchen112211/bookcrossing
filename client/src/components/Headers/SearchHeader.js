@@ -1,23 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // reactstrap components
-import { Container } from "reactstrap";
-import { BookHalf } from "react-bootstrap-icons";
+import {Container} from 'reactstrap';
+import {BookHalf} from 'react-bootstrap-icons';
 
 function SearchHeader({bookCount}) {
-  let pageHeader = React.createRef();
+  const pageHeader = React.createRef();
 
   React.useEffect(() => {
     if (window.innerWidth > 1991) {
       const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
+        const windowScrollTop = window.pageYOffset / 3;
         pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
+          'translate3d(0,' + windowScrollTop + 'px,0)';
       };
-      window.addEventListener("scroll", updateScroll);
+      window.addEventListener('scroll', updateScroll);
       return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
+        window.removeEventListener('scroll', updateScroll);
       };
     }
   });
@@ -29,7 +29,7 @@ function SearchHeader({bookCount}) {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/header.jpg").default + ")",
+              'url(' + require('assets/img/header.jpg').default + ')',
           }}
           ref={pageHeader}
         ></div>

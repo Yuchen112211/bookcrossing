@@ -39,5 +39,11 @@
   },
   "optionalDependencies": {
     "typescript": "3.9.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-react": "^7.23.1"
   }
 }

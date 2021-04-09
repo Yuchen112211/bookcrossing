@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -14,21 +14,21 @@ import {
   Row,
   Col,
   Modal,
-} from "reactstrap";
+} from 'reactstrap';
 
 // core components
-import Navigation from "components/Navigation/Navigation.js";
-import Footer from "components/Footer/Footer.js";
+import Navigation from 'components/Navigation/Navigation.js';
+import Footer from 'components/Footer/Footer.js';
 
 function ReceivePage() {
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [errorMsg, setErrorMsg] = React.useState("");
+  const [errorMsg, setErrorMsg] = React.useState('');
 
   const onRegisterClicked = () => {
-    const url = "/api/crossings/register";
+    const url = '/api/crossings/register';
     const body = {
-      crossingId: document.getElementById("crossingId").value,
-      message: document.getElementById("message").value,
+      crossingId: document.getElementById('crossingId').value,
+      message: document.getElementById('message').value,
     };
     if (!body.crossingId) {
       const msg = `Crossing ID cannot be empty`;
@@ -36,9 +36,9 @@ function ReceivePage() {
       return;
     }
     fetch(url, {
-      method: "post",
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
@@ -46,27 +46,27 @@ function ReceivePage() {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           setModalOpen(true);
         } else {
-          setErrorMsg("Invalid Crossing ID.");
+          setErrorMsg('Invalid Crossing ID.');
         }
       })
       .catch(function (error) {
         console.log(error);
-        setErrorMsg("Unknown issue, please try again.");
+        setErrorMsg('Unknown issue, please try again.');
       });
   };
 
   React.useEffect(() => {
-    document.body.classList.add("login-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('login-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("login-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('login-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   }, []);
   return (
@@ -77,7 +77,7 @@ function ReceivePage() {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/header.jpg").default + ")",
+              'url(' + require('assets/img/header.jpg').default + ')',
           }}
         ></div>
         <div className="content">
@@ -86,9 +86,9 @@ function ReceivePage() {
               <Col className="ml-auto mr-auto text-center" md="8">
                 <h2 className="title"> Register a book </h2>
                 <p>
-                  {" "}
+                  {' '}
                   Have you received a book from another member? That is great
-                  news — let's register it!{" "}
+                  news — let&apos;s register it!{' '}
                 </p>
               </Col>
             </Row>
@@ -96,20 +96,20 @@ function ReceivePage() {
               <Card className="card-login card-plain">
                 <Form action="" className="form" method="POST">
                   <CardBody>
-                    <InputGroup className={"no-border input-lg"}>
+                    <InputGroup className={'no-border input-lg'}>
                       <Input
                         style={{
-                          color: "white",
+                          color: 'white',
                         }}
                         id="crossingId"
                         placeholder="Crossing ID"
                         type="text"
                       ></Input>
                     </InputGroup>
-                    <InputGroup className={"no-border input-lg"}>
+                    <InputGroup className={'no-border input-lg'}>
                       <Input
                         style={{
-                          color: "white",
+                          color: 'white',
                         }}
                         id="message"
                         placeholder="A message to the sender"
@@ -133,7 +133,7 @@ function ReceivePage() {
               </Card>
             </Col>
             <div>
-              <p id="errorMessage" style={{ color: "white" }}>
+              <p id="errorMessage" style={{color: 'white'}}>
                 {errorMsg}
               </p>
             </div>

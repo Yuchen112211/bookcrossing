@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -15,23 +15,23 @@ import {
   InputGroup,
   Container,
   Col,
-} from "reactstrap";
-import { BookHalf, PersonCircle, ShieldLock } from "react-bootstrap-icons";
+} from 'reactstrap';
+import {BookHalf, PersonCircle, ShieldLock} from 'react-bootstrap-icons';
 
 // core components
-import Navigation from "components/Navigation/Navigation.js";
-import Footer from "components/Footer/Footer.js";
+import Navigation from 'components/Navigation/Navigation.js';
+import Footer from 'components/Footer/Footer.js';
 
 function SigninPage(userSetter, registerSetter) {
-  const [loginError, setLoginError] = React.useState("");
+  const [loginError, setLoginError] = React.useState('');
   const [usernameFocus, setUsernameFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
 
   const onLoginClicked = () => {
-    const url = "/api/signin";
+    const url = '/api/signin';
     const body = {
-      username: document.getElementById("fieldUsername").value,
-      password: document.getElementById("fieldPassword").value,
+      username: document.getElementById('fieldUsername').value,
+      password: document.getElementById('fieldPassword').value,
     };
     if (!body.username || !body.password) {
       const msg = `Please put in your username and password`;
@@ -39,9 +39,9 @@ function SigninPage(userSetter, registerSetter) {
       return;
     }
     fetch(url, {
-      method: "post",
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
@@ -49,31 +49,31 @@ function SigninPage(userSetter, registerSetter) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           console.log(`User ${body.username} Log in success!`);
-          localStorage.setItem("loggedin", body.username);
-          window.location = "/home";
+          localStorage.setItem('loggedin', body.username);
+          window.location = '/home';
         } else {
           const msg = `Incorrect information, check either your username or password. `;
           setLoginError(msg);
         }
       })
       .catch(function (error) {
-        const msg = "Unknown issue, please try again.";
+        const msg = 'Unknown issue, please try again.';
         console.log(msg);
         setLoginError(msg);
       });
   };
 
   React.useEffect(() => {
-    document.body.classList.add("login-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('login-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("login-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('login-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   }, []);
   return (
@@ -84,7 +84,7 @@ function SigninPage(userSetter, registerSetter) {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/login.jpg").default + ")",
+              'url(' + require('assets/img/login.jpg').default + ')',
           }}
         ></div>
         <div className="content">
@@ -98,8 +98,8 @@ function SigninPage(userSetter, registerSetter) {
                   <CardBody>
                     <InputGroup
                       className={
-                        "no-border input-lg" +
-                        (usernameFocus ? " input-group-focus" : "")
+                        'no-border input-lg' +
+                        (usernameFocus ? ' input-group-focus' : '')
                       }
                     >
                       <InputGroupAddon addonType="prepend">
@@ -117,8 +117,8 @@ function SigninPage(userSetter, registerSetter) {
                     </InputGroup>
                     <InputGroup
                       className={
-                        "no-border input-lg" +
-                        (passwordFocus ? " input-group-focus" : "")
+                        'no-border input-lg' +
+                        (passwordFocus ? ' input-group-focus' : '')
                       }
                     >
                       <InputGroupAddon addonType="prepend">
@@ -153,7 +153,7 @@ function SigninPage(userSetter, registerSetter) {
               </Card>
             </Col>
             <div>
-              <p id="loginError" style={{ color: "white" }}>
+              <p id="loginError" style={{color: 'white'}}>
                 {loginError}
               </p>
             </div>

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 // reactstrap components
 import {
   Button,
@@ -15,10 +15,10 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-} from "reactstrap";
+} from 'reactstrap';
 
 function Navigation() {
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
+  const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
     const updateNavbarColor = () => {
@@ -26,17 +26,17 @@ function Navigation() {
         document.documentElement.scrollTop > 399 ||
         document.body.scrollTop > 399
       ) {
-        setNavbarColor("");
+        setNavbarColor('');
       } else if (
         document.documentElement.scrollTop < 400 ||
         document.body.scrollTop < 400
       ) {
-        setNavbarColor("navbar-transparent");
+        setNavbarColor('navbar-transparent');
       }
     };
-    window.addEventListener("scroll", updateNavbarColor);
+    window.addEventListener('scroll', updateNavbarColor);
     return function cleanup() {
-      window.removeEventListener("scroll", updateNavbarColor);
+      window.removeEventListener('scroll', updateNavbarColor);
     };
   });
   return (
@@ -45,12 +45,12 @@ function Navigation() {
         <div
           id="bodyClick"
           onClick={() => {
-            document.documentElement.classList.toggle("nav-open");
+            document.documentElement.classList.toggle('nav-open');
             setCollapseOpen(false);
           }}
         />
       ) : null}
-      <Navbar className={"fixed-top " + navbarColor} color="info" expand="lg">
+      <Navbar className={'fixed-top ' + navbarColor} color="info" expand="lg">
         <Container>
           <UncontrolledDropdown className="button-dropdown">
             <DropdownToggle
@@ -59,7 +59,7 @@ function Navigation() {
               href="#pablo"
               id="navbarDropdown"
               tag="a"
-              onClick={(e) => e.preventDefault()}
+              onClick={e => e.preventDefault()}
             >
               <span className="button-bar"></span>
               <span className="button-bar"></span>
@@ -67,7 +67,7 @@ function Navigation() {
             </DropdownToggle>
             <DropdownMenu aria-labelledby="navbarDropdown">
               <DropdownItem header tag="a">
-                Let's share
+                Let&apos;s share
               </DropdownItem>
               <DropdownItem to="/send" tag={Link}>
                 Send a book
@@ -101,7 +101,7 @@ function Navigation() {
                   Library
                 </NavLink>
               </NavItem>
-              {localStorage.getItem("loggedin") ? (
+              {localStorage.getItem('loggedin') ? (
                 <NavItem>
                   <NavLink to="/profile" tag={Link}>
                     Profile
@@ -119,13 +119,13 @@ function Navigation() {
                   </Button>
                 </NavItem>
               )}
-              {localStorage.getItem("loggedin") && (
+              {localStorage.getItem('loggedin') && (
                 <NavItem>
                   <NavLink
                     tag={Link}
                     to="/home"
                     onClick={() => {
-                      localStorage.removeItem("loggedin");
+                      localStorage.removeItem('loggedin');
                     }}
                   >
                     SIGN OUT

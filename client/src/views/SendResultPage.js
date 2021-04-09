@@ -1,9 +1,9 @@
-import React from "react";
-import Navigation from "components/Navigation/Navigation.js";
-import HomeHeader from "components/Headers/HomeHeader.js";
-import Footer from "components/Footer/Footer.js";
+import React from 'react';
+import Navigation from 'components/Navigation/Navigation.js';
+import HomeHeader from 'components/Headers/HomeHeader.js';
+import Footer from 'components/Footer/Footer.js';
 
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom';
 import {
   Button,
   Container,
@@ -12,39 +12,39 @@ import {
   Card,
   CardBody,
   CardTitle,
-} from "reactstrap";
+} from 'reactstrap';
 
 function SendResultPage() {
   const [recipient, setRecipient] = React.useState({});
 
-  const book = JSON.parse(localStorage.getItem("sentBook"));
+  const book = JSON.parse(localStorage.getItem('sentBook'));
 
   React.useEffect(() => {
-    document.body.classList.add("index-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('index-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("index-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('index-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   });
 
   const getRandomUser = () => {
-    fetch("/api/users/getRandom", {
-      method: "post",
+    fetch('/api/users/getRandom', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username: localStorage.getItem("loggedin") }),
+      body: JSON.stringify({username: localStorage.getItem('loggedin')}),
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
-          localStorage.setItem("recipient", JSON.stringify(data.data[0]));
+        if (data.msg === 'success') {
+          localStorage.setItem('recipient', JSON.stringify(data.data[0]));
           setRecipient(data.data[0]);
         }
       });
@@ -53,21 +53,21 @@ function SendResultPage() {
   if (Object.keys(recipient).length === 0) getRandomUser();
 
   const afterRedirect = () => {
-    localStorage.removeItem("recipient");
-    localStorage.removeItem("sentBook");
+    localStorage.removeItem('recipient');
+    localStorage.removeItem('sentBook');
   };
 
   const confirmSend = () => {
     const sentBody = {
       toUsername: recipient.username,
-      fromUsername: localStorage.getItem("loggedin"),
+      fromUsername: localStorage.getItem('loggedin'),
       toId: recipient._id.toString(),
       bookId: book.bookID,
     };
-    fetch("/api/crossings/newSent", {
-      method: "post",
+    fetch('/api/crossings/newSent', {
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(sentBody),
     })
@@ -75,7 +75,7 @@ function SendResultPage() {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           afterRedirect();
         }
       });
@@ -119,7 +119,7 @@ function SendResultPage() {
             <Row>
               <Col className="ml-auto mr-auto text-center" md="10">
                 <h3>
-                  If so, kindly send your book to user:{" "}
+                  If so, kindly send your book to user:{' '}
                   <b>{recipient.username}</b> with following information
                 </h3>
               </Col>
@@ -127,7 +127,7 @@ function SendResultPage() {
             <Row>
               <Col className="ml-auto mr-auto text-center" md="10">
                 <Card>
-                  <CardBody style={{ height: "9rem" }}>
+                  <CardBody style={{height: '9rem'}}>
                     <CardTitle>
                       First name: <b>{recipient.firstname}</b>
                     </CardTitle>
@@ -149,7 +149,7 @@ function SendResultPage() {
                     <Button
                       to="/profile"
                       onClick={() => {
-                        alert("Successfully created sent record!");
+                        alert('Successfully created sent record!');
                         confirmSend();
                         // Add record to crossing
                       }}

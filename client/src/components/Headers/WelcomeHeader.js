@@ -1,23 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 // reactstrap components
-import { Button, Container } from "reactstrap";
-import { BookHalf } from "react-bootstrap-icons";
+import {Button, Container} from 'reactstrap';
+import {BookHalf} from 'react-bootstrap-icons';
 
 function WelcomeHeader() {
-  let pageHeader = React.createRef();
+  const pageHeader = React.createRef();
 
   React.useEffect(() => {
     if (window.innerWidth > 991) {
       const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
+        const windowScrollTop = window.pageYOffset / 3;
         pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
+          'translate3d(0,' + windowScrollTop + 'px,0)';
       };
-      window.addEventListener("scroll", updateScroll);
+      window.addEventListener('scroll', updateScroll);
       return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
+        window.removeEventListener('scroll', updateScroll);
       };
     }
   });
@@ -29,7 +29,7 @@ function WelcomeHeader() {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/header.jpg").default + ")",
+              'url(' + require('assets/img/header.jpg').default + ')',
           }}
           ref={pageHeader}
         ></div>

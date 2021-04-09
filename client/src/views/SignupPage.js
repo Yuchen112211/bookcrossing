@@ -1,6 +1,6 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {useForm} from 'react-hook-form';
+import {Link} from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -17,7 +17,7 @@ import {
   Container,
   Col,
   Modal,
-} from "reactstrap";
+} from 'reactstrap';
 import {
   BookHalf,
   CreditCard2Front,
@@ -25,37 +25,37 @@ import {
   Mailbox,
   PersonCircle,
   ShieldLock,
-} from "react-bootstrap-icons";
+} from 'react-bootstrap-icons';
 
 // core components
-import Navigation from "components/Navigation/Navigation.js";
-import Footer from "components/Footer/Footer.js";
+import Navigation from 'components/Navigation/Navigation.js';
+import Footer from 'components/Footer/Footer.js';
 
-function SignupPage(props) {
+function SignupPage() {
   const [usernameFocus, setUsernameFocus] = React.useState(false);
   const [passwordFocus, setPasswordFocus] = React.useState(false);
   const [addressFocus, setAddressFocus] = React.useState(false);
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
 
-  const [errMsg, setErrMsg] = React.useState("");
+  const [errMsg, setErrMsg] = React.useState('');
   const [modalOpen, setModalOpen] = React.useState(false);
-  const { register, handleSubmit, errors } = useForm();
+  const {register, handleSubmit, errors} = useForm();
 
-  const onSubmit = (data) => {
-    const signupUrl = "/api/users/signup";
+  const onSubmit = data => {
+    const signupUrl = '/api/users/signup';
 
     const body = {
-      username: document.getElementById("fieldUsername").value,
-      password: document.getElementById("fieldPassword").value,
-      address: document.getElementById("fieldMailingAddress").value,
-      firstname: document.getElementById("fieldFirstName").value,
-      lastname: document.getElementById("fieldLastName").value,
+      username: document.getElementById('fieldUsername').value,
+      password: document.getElementById('fieldPassword').value,
+      address: document.getElementById('fieldMailingAddress').value,
+      firstname: document.getElementById('fieldFirstName').value,
+      lastname: document.getElementById('fieldLastName').value,
     };
     fetch(signupUrl, {
-      method: "post",
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
@@ -71,20 +71,20 @@ function SignupPage(props) {
         }
       })
       .catch(function (error) {
-        const msg = "Unknown issue, please try again.";
+        const msg = 'Unknown issue, please try again.';
         setErrMsg(msg);
       });
   };
 
   React.useEffect(() => {
-    document.body.classList.add("login-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('login-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("login-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('login-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   }, []);
   return (
@@ -95,7 +95,7 @@ function SignupPage(props) {
           className="page-header-image"
           style={{
             backgroundImage:
-              "url(" + require("assets/img/login.jpg").default + ")",
+              'url(' + require('assets/img/login.jpg').default + ')',
           }}
         ></div>
         <div className="content">
@@ -106,7 +106,7 @@ function SignupPage(props) {
                   action=""
                   method="post"
                   onSubmit={handleSubmit(onSubmit)}
-                  className={"register-form"}
+                  className={'register-form'}
                 >
                   <CardHeader className="text-center">
                     <BookHalf size={96} />
@@ -114,8 +114,8 @@ function SignupPage(props) {
                   <CardBody>
                     <InputGroup
                       className={
-                        "no-border input-lg" +
-                        (usernameFocus ? " input-group-focus" : "")
+                        'no-border input-lg' +
+                        (usernameFocus ? ' input-group-focus' : '')
                       }
                     >
                       <InputGroupAddon addonType="prepend">
@@ -134,18 +134,18 @@ function SignupPage(props) {
                         required
                         title="Username should contains at least 6 characters with only letters and numbers"
                       >
-                        >
+                        {'>'}
                       </Input>
                       {errors.username && (
-                        <p id="usernameError" style={{ color: "red" }}>
+                        <p id="usernameError" style={{color: 'red'}}>
                           {errors.username.message}
                         </p>
                       )}
                     </InputGroup>
                     <InputGroup
                       className={
-                        "no-border input-lg" +
-                        (passwordFocus ? " input-group-focus" : "")
+                        'no-border input-lg' +
+                        (passwordFocus ? ' input-group-focus' : '')
                       }
                     >
                       <InputGroupAddon addonType="prepend">
@@ -165,15 +165,15 @@ function SignupPage(props) {
                         title="Password need to contain at least eight characters"
                       ></Input>
                       {errors.password && (
-                        <p id="passwordError" style={{ color: "red" }}>
+                        <p id="passwordError" style={{color: 'red'}}>
                           {errors.password.message}
                         </p>
                       )}
                     </InputGroup>
                     <InputGroup
                       className={
-                        "no-border input-lg" +
-                        (addressFocus ? " input-group-focus" : "")
+                        'no-border input-lg' +
+                        (addressFocus ? ' input-group-focus' : '')
                       }
                     >
                       <InputGroupAddon addonType="prepend">
@@ -193,8 +193,8 @@ function SignupPage(props) {
                     </InputGroup>
                     <InputGroup
                       className={
-                        "no-border input-lg" +
-                        (firstFocus ? " input-group-focus" : "")
+                        'no-border input-lg' +
+                        (firstFocus ? ' input-group-focus' : '')
                       }
                     >
                       <InputGroupAddon addonType="prepend">
@@ -213,8 +213,8 @@ function SignupPage(props) {
                     </InputGroup>
                     <InputGroup
                       className={
-                        "no-border input-lg" +
-                        (lastFocus ? " input-group-focus" : "")
+                        'no-border input-lg' +
+                        (lastFocus ? ' input-group-focus' : '')
                       }
                     >
                       <InputGroupAddon addonType="prepend">
@@ -237,7 +237,7 @@ function SignupPage(props) {
                       block
                       className="btn-round"
                       color="info"
-                      type={"submit"}
+                      type={'submit'}
                       size="lg"
                     >
                       Sign me up!
@@ -249,7 +249,7 @@ function SignupPage(props) {
                 </Form>
               </Card>
             </Col>
-            <p id="duplicatesError" style={{ color: "red" }}>
+            <p id="duplicatesError" style={{color: 'red'}}>
               {errMsg}
             </p>
           </Container>

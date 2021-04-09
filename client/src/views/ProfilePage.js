@@ -1,11 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
   Switch,
   Redirect,
   Route,
   useRouteMatch,
   useParams,
-} from "react-router-dom";
+} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // reactstrap components
 import {
@@ -24,16 +25,16 @@ import {
   FormGroup,
   Input,
   Label,
-} from "reactstrap";
-import { Envelope, Pencil } from "react-bootstrap-icons";
+} from 'reactstrap';
+import {Envelope, Pencil} from 'react-bootstrap-icons';
 
 // core components
-import Navigation from "components/Navigation/Navigation.js";
-import Header from "components/Headers/ProfilePageHeader";
-import Footer from "components/Footer/Footer.js";
+import Navigation from 'components/Navigation/Navigation.js';
+import Header from 'components/Headers/ProfilePageHeader';
+import Footer from 'components/Footer/Footer.js';
 
 function ProfilePage() {
-  let match = useRouteMatch();
+  const match = useRouteMatch();
 
   return (
     <div>
@@ -42,7 +43,7 @@ function ProfilePage() {
           <Profile />
         </Route>
         <Route path={match.path}>
-          <Redirect to={`profile/${localStorage.getItem("loggedin")}`} />
+          <Redirect to={`profile/${localStorage.getItem('loggedin')}`} />
         </Route>
       </Switch>
     </div>
@@ -50,9 +51,9 @@ function ProfilePage() {
 }
 
 function Profile() {
-  const { username } = useParams();
+  const {username} = useParams();
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [errMsg, setErrMsg] = React.useState("");
+  const [errMsg, setErrMsg] = React.useState('');
   const [userData, setUserData] = React.useState({
     username: username,
     sent: [],
@@ -63,28 +64,28 @@ function Profile() {
   const [pills, setPills] = React.useState(0);
 
   const onUpdateClicked = () => {
-    setErrMsg("");
-    console.log("userData", userData);
-    const url = "/api/users/update";
+    setErrMsg('');
+    console.log('userData', userData);
+    const url = '/api/users/update';
     const body = {
-      firstname: document.getElementById("fieldFirstname").value,
-      lastname: document.getElementById("fieldLastname").value,
-      mailingAddress: document.getElementById("fieldMailingAddress").value,
-      about: document.getElementById("fieldAbout").value,
-      instagram: document.getElementById("fieldInstagram").value,
-      twitter: document.getElementById("fieldTwitter").value,
+      firstname: document.getElementById('fieldFirstname').value,
+      lastname: document.getElementById('fieldLastname').value,
+      mailingAddress: document.getElementById('fieldMailingAddress').value,
+      about: document.getElementById('fieldAbout').value,
+      instagram: document.getElementById('fieldInstagram').value,
+      twitter: document.getElementById('fieldTwitter').value,
     };
-    console.log("body", body);
+    console.log('body', body);
     if (!body.firstname || body.firstname.length === 0) {
-      setErrMsg("First name cannot be empty");
+      setErrMsg('First name cannot be empty');
       return;
     }
     if (!body.lastname || body.lastname.length === 0) {
-      setErrMsg("Last name cannot be empty");
+      setErrMsg('Last name cannot be empty');
       return;
     }
     if (!body.mailingAddress || body.mailingAddress.length === 0) {
-      setErrMsg("Mailing address cannot be empty");
+      setErrMsg('Mailing address cannot be empty');
       return;
     }
     if (!body.about || body.about.length === 0) {
@@ -96,11 +97,11 @@ function Profile() {
     if (!body.twitter || body.twitter.length === 0) {
       delete body.twitter;
     }
-    console.log("body", body);
+    console.log('body', body);
     fetch(url, {
-      method: "post",
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
@@ -108,12 +109,12 @@ function Profile() {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           window.location.reload();
         }
       })
       .catch(function (error) {
-        const msg = "Unknown issue, please try again.";
+        const msg = 'Unknown issue, please try again.';
         setErrMsg(msg);
       });
   };
@@ -121,16 +122,16 @@ function Profile() {
   React.useEffect(() => {
     const url = `/api/users/info/${username}`;
     fetch(url, {
-      method: "get",
+      method: 'get',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           if (pills === 0) {
             setCurrentList(data.data.sent);
           } else if (pills === 1) {
@@ -146,17 +147,16 @@ function Profile() {
         console.log(error);
       });
 
-    document.body.classList.add("profile-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('profile-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("profile-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('profile-page');
+      document.body.classList.remove('sidebar-collapse');
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   return (
     <>
       <Navigation />
@@ -178,7 +178,7 @@ function Profile() {
                   className="btn-round"
                   color="info"
                   size="lg"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     setModalOpen(true);
                   }}
@@ -194,6 +194,7 @@ function Profile() {
               {userData.twitter
                 ? [
                     <Button
+                      key="buttonTwitter"
                       className="btn-round btn-icon"
                       color="default"
                       id="tooltip515203352"
@@ -203,7 +204,11 @@ function Profile() {
                     >
                       <i className="fab fa-twitter"></i>
                     </Button>,
-                    <UncontrolledTooltip delay={0} target="tooltip515203352">
+                    <UncontrolledTooltip
+                      key="tooltipTwitter"
+                      delay={0}
+                      target="tooltip515203352"
+                    >
                       Follow me on Twitter
                     </UncontrolledTooltip>,
                   ]
@@ -212,6 +217,7 @@ function Profile() {
               {userData.instagram
                 ? [
                     <Button
+                      key="buttonInstagram"
                       className="btn-round btn-icon"
                       color="default"
                       id="tooltip340339231"
@@ -221,7 +227,11 @@ function Profile() {
                     >
                       <i className="fab fa-instagram"></i>
                     </Button>,
-                    <UncontrolledTooltip delay={0} target="tooltip340339231">
+                    <UncontrolledTooltip
+                      key="tooltipInstagram"
+                      delay={0}
+                      target="tooltip340339231"
+                    >
                       Follow me on Instagram
                     </UncontrolledTooltip>,
                   ]
@@ -240,9 +250,9 @@ function Profile() {
                   >
                     <NavItem>
                       <NavLink
-                        className={pills === 0 ? "active" : ""}
+                        className={pills === 0 ? 'active' : ''}
                         href="#pablo"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           setPills(0);
                           setCurrentList(userData.sent);
@@ -254,9 +264,9 @@ function Profile() {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        className={pills === 1 ? "active" : ""}
+                        className={pills === 1 ? 'active' : ''}
                         href="#pablo"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           setPills(1);
                           setCurrentList(userData.received);
@@ -268,9 +278,9 @@ function Profile() {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        className={pills === 2 ? "active" : ""}
+                        className={pills === 2 ? 'active' : ''}
                         href="#pablo"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           setPills(2);
                           setCurrentList(userData.traveling);
@@ -283,7 +293,7 @@ function Profile() {
                   </Nav>
                 </div>
               </Col>
-              <TabContent className="gallery" activeTab={"pills" + pills}>
+              <TabContent className="gallery" activeTab={'pills' + pills}>
                 <TabPane tabId="pills1"></TabPane>
                 <TabPane tabId="pills2"></TabPane>
                 <TabPane tabId="pills3"></TabPane>
@@ -380,7 +390,7 @@ function Profile() {
                   Update
                 </Button>
               </Form>
-              <p id="error" style={{ color: "red" }}>
+              <p id="error" style={{color: 'red'}}>
                 {errMsg}
               </p>
             </div>
@@ -393,23 +403,42 @@ function Profile() {
   );
 }
 
-function InventoryTable(props) {
-  React.useEffect(() => {
-    console.log(props);
-  });
+function InventoryTable({list}) {
   return (
     <>
       <Row className="text-center">
-        {props.list.map((item) => [
-          <Col md="2">{item.crossingId}</Col>,
-          <Col md="2">{item.fromUsername}</Col>,
-          <Col md="2">{item.toUsername}</Col>,
-          <Col md="3">{item.requestedAt}</Col>,
-          <Col md="3">{item.receivedAt}</Col>,
+        {list.map(item => [
+          <Col key={item.crossingId} md="2">
+            {item.crossingId}
+          </Col>,
+          <Col key={item.crossingId} md="2">
+            {item.fromUsername}
+          </Col>,
+          <Col key={item.crossingId} md="2">
+            {item.toUsername}
+          </Col>,
+          <Col key={item.crossingId} md="3">
+            {item.requestedAt}
+          </Col>,
+          <Col key={item.crossingId} md="3">
+            {item.receivedAt}
+          </Col>,
         ])}
       </Row>
     </>
   );
 }
+
+InventoryTable.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      crossingId: PropTypes.string.isRequired,
+      fromUsername: PropTypes.number.isRequired,
+      toUsername: PropTypes.number.isRequired,
+      requestedAt: PropTypes.number.isRequired,
+      receivedAt: PropTypes.number,
+    })
+  ).isRequired,
+};
 
 export default ProfilePage;
