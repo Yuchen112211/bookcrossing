@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   Switch,
   Redirect,
   Route,
   useRouteMatch,
   useParams,
-} from 'react-router-dom';
-import PropTypes from 'prop-types';
+} from "react-router-dom";
+import PropTypes from "prop-types";
 
 // reactstrap components
 import {
@@ -25,13 +25,13 @@ import {
   FormGroup,
   Input,
   Label,
-} from 'reactstrap';
-import {Envelope, Pencil} from 'react-bootstrap-icons';
+} from "reactstrap";
+import { Envelope, Pencil } from "react-bootstrap-icons";
 
 // core components
-import Navigation from 'components/Navigation/Navigation.js';
-import Header from 'components/Headers/ProfilePageHeader';
-import Footer from 'components/Footer/Footer.js';
+import Navigation from "components/Navigation/Navigation.js";
+import Header from "components/Headers/ProfilePageHeader";
+import Footer from "components/Footer/Footer.js";
 
 function ProfilePage() {
   const match = useRouteMatch();
@@ -43,7 +43,7 @@ function ProfilePage() {
           <Profile />
         </Route>
         <Route path={match.path}>
-          <Redirect to={`profile/${localStorage.getItem('loggedin')}`} />
+          <Redirect to={`profile/${localStorage.getItem("loggedin")}`} />
         </Route>
       </Switch>
     </div>
@@ -51,9 +51,9 @@ function ProfilePage() {
 }
 
 function Profile() {
-  const {username} = useParams();
+  const { username } = useParams();
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [errMsg, setErrMsg] = React.useState('');
+  const [errMsg, setErrMsg] = React.useState("");
   const [userData, setUserData] = React.useState({
     username: username,
     sent: [],
@@ -64,28 +64,28 @@ function Profile() {
   const [pills, setPills] = React.useState(0);
 
   const onUpdateClicked = () => {
-    setErrMsg('');
-    console.log('userData', userData);
-    const url = '/api/users/update';
+    setErrMsg("");
+    console.log("userData", userData);
+    const url = "/api/users/update";
     const body = {
-      firstname: document.getElementById('fieldFirstname').value,
-      lastname: document.getElementById('fieldLastname').value,
-      mailingAddress: document.getElementById('fieldMailingAddress').value,
-      about: document.getElementById('fieldAbout').value,
-      instagram: document.getElementById('fieldInstagram').value,
-      twitter: document.getElementById('fieldTwitter').value,
+      firstname: document.getElementById("fieldFirstname").value,
+      lastname: document.getElementById("fieldLastname").value,
+      mailingAddress: document.getElementById("fieldMailingAddress").value,
+      about: document.getElementById("fieldAbout").value,
+      instagram: document.getElementById("fieldInstagram").value,
+      twitter: document.getElementById("fieldTwitter").value,
     };
-    console.log('body', body);
+    console.log("body", body);
     if (!body.firstname || body.firstname.length === 0) {
-      setErrMsg('First name cannot be empty');
+      setErrMsg("First name cannot be empty");
       return;
     }
     if (!body.lastname || body.lastname.length === 0) {
-      setErrMsg('Last name cannot be empty');
+      setErrMsg("Last name cannot be empty");
       return;
     }
     if (!body.mailingAddress || body.mailingAddress.length === 0) {
-      setErrMsg('Mailing address cannot be empty');
+      setErrMsg("Mailing address cannot be empty");
       return;
     }
     if (!body.about || body.about.length === 0) {
@@ -97,11 +97,11 @@ function Profile() {
     if (!body.twitter || body.twitter.length === 0) {
       delete body.twitter;
     }
-    console.log('body', body);
+    console.log("body", body);
     fetch(url, {
-      method: 'post',
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     })
@@ -109,12 +109,12 @@ function Profile() {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === 'success') {
+        if (data.msg === "success") {
           window.location.reload();
         }
       })
       .catch(function (error) {
-        const msg = 'Unknown issue, please try again.';
+        const msg = "Unknown issue, please try again.";
         setErrMsg(msg);
       });
   };
@@ -122,16 +122,16 @@ function Profile() {
   React.useEffect(() => {
     const url = `/api/users/info/${username}`;
     fetch(url, {
-      method: 'get',
+      method: "get",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === 'success') {
+        if (data.msg === "success") {
           if (pills === 0) {
             setCurrentList(data.data.sent);
           } else if (pills === 1) {
@@ -147,13 +147,13 @@ function Profile() {
         console.log(error);
       });
 
-    document.body.classList.add('profile-page');
-    document.body.classList.add('sidebar-collapse');
-    document.documentElement.classList.remove('nav-open');
+    document.body.classList.add("profile-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove('profile-page');
-      document.body.classList.remove('sidebar-collapse');
+      document.body.classList.remove("profile-page");
+      document.body.classList.remove("sidebar-collapse");
     };
   }, []);
 
@@ -178,7 +178,7 @@ function Profile() {
                   className="btn-round"
                   color="info"
                   size="lg"
-                  onClick={e => {
+                  onClick={(e) => {
                     e.preventDefault();
                     setModalOpen(true);
                   }}
@@ -250,9 +250,9 @@ function Profile() {
                   >
                     <NavItem>
                       <NavLink
-                        className={pills === 0 ? 'active' : ''}
+                        className={pills === 0 ? "active" : ""}
                         href="#pablo"
-                        onClick={e => {
+                        onClick={(e) => {
                           e.preventDefault();
                           setPills(0);
                           setCurrentList(userData.sent);
@@ -264,9 +264,9 @@ function Profile() {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        className={pills === 1 ? 'active' : ''}
+                        className={pills === 1 ? "active" : ""}
                         href="#pablo"
-                        onClick={e => {
+                        onClick={(e) => {
                           e.preventDefault();
                           setPills(1);
                           setCurrentList(userData.received);
@@ -278,9 +278,9 @@ function Profile() {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        className={pills === 2 ? 'active' : ''}
+                        className={pills === 2 ? "active" : ""}
                         href="#pablo"
-                        onClick={e => {
+                        onClick={(e) => {
                           e.preventDefault();
                           setPills(2);
                           setCurrentList(userData.traveling);
@@ -293,7 +293,7 @@ function Profile() {
                   </Nav>
                 </div>
               </Col>
-              <TabContent className="gallery" activeTab={'pills' + pills}>
+              <TabContent className="gallery" activeTab={"pills" + pills}>
                 <TabPane tabId="pills1"></TabPane>
                 <TabPane tabId="pills2"></TabPane>
                 <TabPane tabId="pills3"></TabPane>
@@ -390,24 +390,24 @@ function Profile() {
                   Update
                 </Button>
               </Form>
-              <p id="error" style={{color: 'red'}}>
+              <p id="error" style={{ color: "red" }}>
                 {errMsg}
               </p>
             </div>
           </Modal>
         ) : null}
 
-        <Footer bgColor="black" />
+        <Footer bgColor="blue" />
       </div>
     </>
   );
 }
 
-function InventoryTable({list}) {
+function InventoryTable({ list }) {
   return (
     <>
       <Row className="text-center">
-        {list.map(item => [
+        {list.map((item) => [
           <Col key={item.crossingId} md="2">
             {item.crossingId}
           </Col>,

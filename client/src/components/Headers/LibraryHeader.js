@@ -133,7 +133,7 @@ function LibraryHeader({setPageCount, setSearchData, setSearchState}) {
 
   return (
     <>
-      <div className="page-header page-header-small">
+      <div className="page-header page-header-small clear-filter" filter-color="blue">
         <div
           className="page-header-image"
           style={{

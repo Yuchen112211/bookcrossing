@@ -78,7 +78,7 @@ function SendPage() {
   return (
     <>
       <Navigation />
-      <div className="page-header">
+      <div className="page-header clear-filter" filter-color="blue">
         <div
           className="page-header-image"
           style={{
@@ -163,7 +163,7 @@ function SendPage() {
             </Button>
           </div>
         </Modal>
-        <Footer bgColor="black" />
+        <Footer bgColor="blue" />
       </div>
     </>
   );

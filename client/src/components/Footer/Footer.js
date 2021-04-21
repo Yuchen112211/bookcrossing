@@ -25,7 +25,7 @@ function Footer({bgColor}) {
         When you learn, teach, when you get, give. -<i>Maya Angelou</i>
         <div className="copyright" id="copyright">
           © {new Date().getFullYear()}, Built by{' '}
-          <a href="" target="_blank">
+          <a href="https://twitter.com/Yuchen52624402" target="_blank">
             Yuchen
           </a>{' '}
           &amp;{' '}

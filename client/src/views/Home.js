@@ -79,7 +79,7 @@ function Home() {
             </Container>
           </div>
         </div>
-        <Footer bgColor="black" />
+        <Footer bgColor="blue" />
       </div>
     </>
   );

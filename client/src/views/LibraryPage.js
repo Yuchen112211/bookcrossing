@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
 // reactstrap components
-import {Container} from 'reactstrap';
+import { Container } from "reactstrap";
 
 // core components
-import Navigation from 'components/Navigation/Navigation.js';
-import WelcomeHeader from 'components/Headers/WelcomeHeader.js';
-import LibraryHeader from 'components/Headers/LibraryHeader.js';
-import SearchHeader from 'components/Headers/SearchHeader.js';
-import Footer from 'components/Footer/Footer.js';
-import Pagination from 'components/Pagination/Pagination.js';
-import Books from 'components/Books.js';
+import Navigation from "components/Navigation/Navigation.js";
+import WelcomeHeader from "components/Headers/WelcomeHeader.js";
+import LibraryHeader from "components/Headers/LibraryHeader.js";
+import SearchHeader from "components/Headers/SearchHeader.js";
+import Footer from "components/Footer/Footer.js";
+import Pagination from "components/Pagination/Pagination.js";
+import Books from "components/Books.js";
 
 function LibraryPage() {
   const [searchData, setSearchData] = React.useState([]);
@@ -21,14 +21,14 @@ function LibraryPage() {
   const [pageSelected, setPage] = React.useState(1);
 
   React.useEffect(() => {
-    document.body.classList.add('index-page');
-    document.body.classList.add('sidebar-collapse');
-    document.documentElement.classList.remove('nav-open');
+    document.body.classList.add("index-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove('index-page');
-      document.body.classList.remove('sidebar-collapse');
+      document.body.classList.remove("index-page");
+      document.body.classList.remove("sidebar-collapse");
     };
   });
 
@@ -49,8 +49,8 @@ function LibraryPage() {
     <>
       <Navigation />
       <div className="wrapper">
-        {!localStorage.getItem('loggedin') && <WelcomeHeader />}
-        {localStorage.getItem('loggedin') && !searchState && (
+        {!localStorage.getItem("loggedin") && <WelcomeHeader />}
+        {localStorage.getItem("loggedin") && !searchState && (
           <LibraryHeader
             setSearchData={setSearchData}
             setSearchState={setSearchState}
@@ -58,7 +58,7 @@ function LibraryPage() {
           />
         )}
 
-        {localStorage.getItem('loggedin') && searchState && (
+        {localStorage.getItem("loggedin") && searchState && (
           <SearchHeader bookCount={searchData.length} />
         )}
 
@@ -77,7 +77,7 @@ function LibraryPage() {
           )}
         </Container>
         <div className="main"></div>
-        <Footer bgColor="black" />
+        <Footer bgColor="blue" />
       </div>
     </>
   );
