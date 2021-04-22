@@ -33,19 +33,19 @@ function Home() {
             <Container>
               <Row>
                 <Col className="ml-auto mr-auto text-center" md="8">
-                  <h2 className="title">What is Bookcrossing?</h2>
-                  <h5 className="blockquote">
+                  <h1 className="title">What is Bookcrossing?</h1>
+                  <h2 className="blockquote">
                     It&apos;s a project that allows you to send books and
                     receive books back from random people. Here you can send a
                     book to a total random book lover, and receiving books from
                     others! Let&apos;s explore the true emotion and culture
                     written into words, grasp the wisdom of the human race.
-                  </h5>
+                  </h2>
                 </Col>
               </Row>
               <Row>
                 <Col className="ml-auto mr-auto text-center" md="8">
-                  <h2 className="title">How does it work?</h2>
+                  <h3 className="title">How does it work?</h3>
                 </Col>
               </Row>
               <Row>

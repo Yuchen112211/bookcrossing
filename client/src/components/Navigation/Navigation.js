@@ -58,7 +58,7 @@ function Navigation() {
               data-toggle="dropdown"
               href="#pablo"
               id="navbarDropdown"
-              tag="a"
+              tag="p"
               onClick={e => e.preventDefault()}
             >
               <span className="button-bar"></span>
@@ -115,7 +115,7 @@ function Navigation() {
                     to="/signin"
                     tag={Link}
                   >
-                    <b style={{"color":"black"}}>SIGN IN</b>
+                    <p style={{"color":"black"}}>SIGN IN</p>
                   </Button>
                 </NavItem>
               )}
@@ -137,8 +137,9 @@ function Navigation() {
                   href="https://github.com/Yuchen112211/bookcrossing"
                   target="_blank"
                   id="github-tooltip"
+                  tag="a"
                 >
-                  <i className="fab fa-github"></i>
+                  <i className="fab fa-github"></i>.
                   <p className="d-lg-none d-xl-none">Github</p>
                 </NavLink>
                 <UncontrolledTooltip target="#github-tooltip">

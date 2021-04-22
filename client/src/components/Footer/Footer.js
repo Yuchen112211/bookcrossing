@@ -17,7 +17,7 @@ function Footer({bgColor}) {
                 href="https://github.com/Yuchen112211/bookcrossing"
                 target="_blank"
               >
-                <Github size={24} />
+                <Github size={24} />.
               </a>
             </li>
           </ul>

@@ -397,7 +397,7 @@ function Profile() {
           </Modal>
         ) : null}
 
-        <Footer bgColor="blue" />
+        <Footer bgColor="black" />
       </div>
     </>
   );
