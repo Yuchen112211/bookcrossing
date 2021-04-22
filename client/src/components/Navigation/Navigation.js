@@ -115,7 +115,7 @@ function Navigation() {
                     to="/signin"
                     tag={Link}
                   >
-                    <p>SIGN IN</p>
+                    <b style={{"color":"black"}}>SIGN IN</b>
                   </Button>
                 </NavItem>
               )}

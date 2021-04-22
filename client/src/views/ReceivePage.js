@@ -178,7 +178,7 @@ function ReceivePage() {
             </Button>
           </div>
         </Modal>
-        <Footer bgColor="blue" />
+        <Footer bgColor="black" />
       </div>
     </>
   );

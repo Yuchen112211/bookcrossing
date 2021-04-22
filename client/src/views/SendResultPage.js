@@ -175,7 +175,7 @@ function SendResultPage() {
             </div>
           </Container>
         </div>
-        <Footer bgColor="blue" />
+        <Footer bgColor="black" />
       </div>
     </>
   );

@@ -77,7 +77,7 @@ function LibraryPage() {
           )}
         </Container>
         <div className="main"></div>
-        <Footer bgColor="blue" />
+        <Footer bgColor="black" />
       </div>
     </>
   );
