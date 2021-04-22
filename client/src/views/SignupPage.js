@@ -52,6 +52,10 @@ function SignupPage() {
       firstname: document.getElementById('fieldFirstName').value,
       lastname: document.getElementById('fieldLastName').value,
     };
+    
+    if (!body.username || !body.password || !body.address) {
+      return ; 
+    }
 
     fetch(signupUrl, {
       method: 'post',
