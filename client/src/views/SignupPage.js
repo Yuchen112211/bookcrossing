@@ -52,6 +52,7 @@ function SignupPage() {
       firstname: document.getElementById('fieldFirstName').value,
       lastname: document.getElementById('fieldLastName').value,
     };
+
     fetch(signupUrl, {
       method: 'post',
       headers: {
@@ -87,6 +88,13 @@ function SignupPage() {
       document.body.classList.remove('sidebar-collapse');
     };
   }, []);
+
+  const keyPressed = (event) => {
+    if (event.code == "Enter") {
+      handleSubmit(onSubmit);
+    }
+  }
+
   return (
     <>
       <Navigation />
@@ -107,6 +115,7 @@ function SignupPage() {
                   method="post"
                   onSubmit={handleSubmit(onSubmit)}
                   className={'register-form'}
+                  onKeyDown={keyPressed}
                 >
                   <CardHeader className="text-center">
                     <BookHalf size={96} />

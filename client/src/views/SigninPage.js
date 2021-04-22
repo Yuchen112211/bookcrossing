@@ -76,6 +76,13 @@ function SigninPage(userSetter, registerSetter) {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
+  const formKeyPressed = (event) => {
+    if (event.code == "Enter") {
+      onLoginClicked()
+    }
+  }
+
   return (
     <>
       <Navigation />
@@ -91,7 +98,7 @@ function SigninPage(userSetter, registerSetter) {
           <Container>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
-                <Form action="" className="form" method="POST">
+                <Form action="" className="form" method="POST" onKeyDown={formKeyPressed}>
                   <CardHeader className="text-center">
                     <BookHalf size={96} />
                   </CardHeader>

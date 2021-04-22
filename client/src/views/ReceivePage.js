@@ -57,6 +57,12 @@ function ReceivePage() {
         setErrorMsg('Unknown issue, please try again.');
       });
   };
+  
+  const formKeyPressed = (event) => {
+    if (event.code == "Enter") {
+      onRegisterClicked()
+    }
+  }
 
   React.useEffect(() => {
     document.body.classList.add('login-page');
@@ -69,6 +75,7 @@ function ReceivePage() {
       document.body.classList.remove('sidebar-collapse');
     };
   }, []);
+
   return (
     <>
       <Navigation />
@@ -94,7 +101,7 @@ function ReceivePage() {
             </Row>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
-                <Form action="" className="form" method="POST">
+                <Form action="" className="form" method="POST" onKeyDown={formKeyPressed}>
                   <CardBody>
                     <InputGroup className={'no-border input-lg'}>
                       <Input

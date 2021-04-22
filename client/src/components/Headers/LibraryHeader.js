@@ -71,6 +71,12 @@ function LibraryHeader({setPageCount, setSearchData, setSearchState}) {
       });
   };
 
+  const formKeyPressed = (event) => {
+    if (event.code == "Enter") {
+      onSearchClicked()
+    }
+  }
+
   const SearchForm = () => {
     return (
       <>
@@ -82,7 +88,7 @@ function LibraryHeader({setPageCount, setSearchData, setSearchState}) {
           </Row>
           <Col className="ml-auto mr-auto" md="4">
             <Card className="card-login card-plain">
-              <Form action="" className="form" method="">
+              <Form action="" className="form" method="" onKeyDown={formKeyPressed}>
                 <CardBody>
                   <InputGroup className={'no-border input-lg'}>
                     <Input

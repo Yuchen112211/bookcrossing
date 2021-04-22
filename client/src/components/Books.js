@@ -88,7 +88,7 @@ Books.propTypes = {
       publisher: PropTypes.string,
     })
   ),
-  sendButton: PropTypes.bool.isRequired,
+  sendButton: PropTypes.bool,
 };
 
 export default Books;
