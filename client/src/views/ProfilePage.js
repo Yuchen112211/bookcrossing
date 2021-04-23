@@ -200,8 +200,9 @@ function Profile() {
                       size="lg"
                       href={`https://twitter.com/${userData.twitter}`}
                       target="_blank"
+                      aria-label="TwitterLink"
                     >
-                      <i className="fab fa-twitter"></i>
+                      <i className="fab fa-twitter"> </i>
                     </Button>,
                     <UncontrolledTooltip
                       key="tooltipTwitter"
@@ -223,6 +224,7 @@ function Profile() {
                       size="lg"
                       href={`https://instagram.com/${userData.instagram}`}
                       target="_blank"
+                      aria-label="InstagramLink"
                     >
                       <i className="fab fa-instagram"></i>
                     </Button>,
@@ -247,7 +249,7 @@ function Profile() {
                     pills
                     // role="tablist"
                   >
-                    <NavItem>
+                    <NavItem role="tab">
                       <NavLink
                         className={pills === 0 ? 'active' : ''}
                         href="#pablo"
@@ -261,7 +263,7 @@ function Profile() {
                         <p className="text-muted">Sent</p>
                       </NavLink>
                     </NavItem>
-                    <NavItem>
+                    <NavItem role="tab">
                       <NavLink
                         className={pills === 1 ? 'active' : ''}
                         href="#pablo"
@@ -275,7 +277,7 @@ function Profile() {
                         <p className="text-muted">Received</p>
                       </NavLink>
                     </NavItem>
-                    <NavItem>
+                    <NavItem role="tab">
                       <NavLink
                         className={pills === 2 ? 'active' : ''}
                         href="#pablo"
