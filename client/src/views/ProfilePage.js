@@ -247,7 +247,7 @@ function Profile() {
                   <Nav
                     className="nav-pills-info nav-pills-just-icons"
                     pills
-                    // role="tablist"
+                    role="tablist"
                   >
                     <NavItem role="tab">
                       <NavLink
