@@ -201,8 +201,9 @@ function Profile() {
                       size="lg"
                       href={`https://twitter.com/${userData.twitter}`}
                       target="_blank"
+                      aria-label="TwitterLink"
                     >
-                      <i className="fab fa-twitter"></i>
+                      <i className="fab fa-twitter"> </i>
                     </Button>,
                     <UncontrolledTooltip
                       key="tooltipTwitter"
@@ -224,6 +225,7 @@ function Profile() {
                       size="lg"
                       href={`https://instagram.com/${userData.instagram}`}
                       target="_blank"
+                      aria-label="InstagramLink"
                     >
                       <i className="fab fa-instagram"></i>
                     </Button>,
@@ -238,7 +240,7 @@ function Profile() {
                 : null}
             </div>
             <h3 className="title">About me</h3>
-            <h5 className="description">{userData.about}</h5>
+            <h4 className="description">{userData.about}</h4>
             <Row>
               <Col className="ml-auto mr-auto" md="6">
                 <h4 className="title text-center">My Inventory</h4>
@@ -248,7 +250,7 @@ function Profile() {
                     pills
                     role="tablist"
                   >
-                    <NavItem>
+                    <NavItem role="tab">
                       <NavLink
                         className={pills === 0 ? "active" : ""}
                         href="#pablo"
@@ -262,7 +264,7 @@ function Profile() {
                         <p className="text-muted">Sent</p>
                       </NavLink>
                     </NavItem>
-                    <NavItem>
+                    <NavItem role="tab">
                       <NavLink
                         className={pills === 1 ? "active" : ""}
                         href="#pablo"
@@ -276,7 +278,7 @@ function Profile() {
                         <p className="text-muted">Received</p>
                       </NavLink>
                     </NavItem>
-                    <NavItem>
+                    <NavItem role="tab">
                       <NavLink
                         className={pills === 2 ? "active" : ""}
                         href="#pablo"
@@ -300,7 +302,7 @@ function Profile() {
               </TabContent>
             </Row>
           </Container>
-          <h1> </h1>
+          <h1 aria-label="emptyH1"> </h1>
           <Container>
             <Row className="text-center">
               <Col md="2">Book ID</Col>
