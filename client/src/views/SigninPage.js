@@ -96,6 +96,7 @@ function SigninPage(userSetter, registerSetter) {
         ></div>
         <div className="content">
           <Container>
+            <h1> {"Signing In"} </h1>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
                 <Form action="" className="form" method="POST" onKeyDown={formKeyPressed}>

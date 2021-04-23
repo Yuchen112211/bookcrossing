@@ -99,6 +99,10 @@ function SignupPage() {
     }
   }
 
+  const handleInvalid = (message) => {
+    setErrMsg(message);
+  }
+
   return (
     <>
       <Navigation />
@@ -112,6 +116,7 @@ function SignupPage() {
         ></div>
         <div className="content">
           <Container>
+            <h1> {"Signing Up"} </h1>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
                 <Form
@@ -145,7 +150,7 @@ function SignupPage() {
                         pattern="[A-Za-z0-9]{6,}"
                         ref={register}
                         required
-                        title="Username should contains at least 6 characters with only letters and numbers"
+                        onInvalid={() => { handleInvalid("Please input your username with at least 6 numbers or characters") }}
                       >
                         {'>'}
                       </Input>
@@ -175,7 +180,7 @@ function SignupPage() {
                         pattern=".{8,}"
                         ref={register}
                         required
-                        title="Password need to contain at least eight characters"
+                        onInvalid={() => { handleInvalid("Please input your password with at least length of 8") }}
                       ></Input>
                       {errors.password && (
                         <p id="passwordError" style={{color: 'red'}}>
@@ -202,6 +207,7 @@ function SignupPage() {
                         onBlur={() => setAddressFocus(false)}
                         ref={register}
                         required
+                        onInvalid={() => { handleInvalid("Please input your mailing address") }}
                       ></Input>
                     </InputGroup>
                     <InputGroup
@@ -245,6 +251,9 @@ function SignupPage() {
                       ></Input>
                     </InputGroup>
                   </CardBody>
+                  <p id="duplicatesError" style={{color: 'white'}}>
+                    {errMsg}
+                  </p>
                   <CardFooter className="text-center">
                     <Button
                       block
@@ -262,9 +271,6 @@ function SignupPage() {
                 </Form>
               </Card>
             </Col>
-            <p id="duplicatesError" style={{color: 'red'}}>
-              {errMsg}
-            </p>
           </Container>
         </div>
         <Modal

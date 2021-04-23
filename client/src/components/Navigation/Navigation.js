@@ -50,7 +50,7 @@ function Navigation() {
           }}
         />
       ) : null}
-      <Navbar className={'fixed-top ' + navbarColor} color="info" expand="lg">
+      <Navbar className={'fixed-top ' + navbarColor} color="info" expand="lg" title="Navigation">
         <Container>
           <UncontrolledDropdown className="button-dropdown">
             <DropdownToggle
@@ -127,6 +127,7 @@ function Navigation() {
                     onClick={() => {
                       localStorage.removeItem('loggedin');
                     }}
+                    style={{"color":"black"}}
                   >
                     SIGN OUT
                   </NavLink>
