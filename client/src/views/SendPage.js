@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 // reactstrap components
-import {Col, Button, Container, Row, Modal, Progress} from 'reactstrap';
+import {Col, Button, Container, Row, Modal} from 'reactstrap';
 // core components
 import Navigation from 'components/Navigation/Navigation.js';
 import Footer from 'components/Footer/Footer.js';
@@ -90,16 +90,26 @@ function SendPage() {
           <Container>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
-                <h2 className="title"> Send a book </h2>
+                <h1 className="title"> Send a book </h1>
                 <div className="progress-container progress-info">
                   <span className="progress-badge">
                     Traveling: {travelingCount} out of 5 postcards
                   </span>
-                  <Progress max="5" value={travelingCount}>
-                    <span className="progress-value">
-                      {5 - travelingCount} left
-                    </span>
-                  </Progress>
+                  <div className="progress">
+                    <div 
+                      className="progress-bar" 
+                      role="progressbar" 
+                      aria-valuenow="0" 
+                      aria-valuemin="0" 
+                      aria-valuemax="5" 
+                      style={{"width": "0%"}} 
+                      aria-label="travelingCount"
+                    >
+                      <span className="progress-value" title="LeftNumber">
+                        {5 - travelingCount} left
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <p>
                   You will be given a Crossing ID that you must attach it on the

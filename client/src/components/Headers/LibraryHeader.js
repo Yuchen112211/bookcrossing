@@ -83,7 +83,7 @@ function LibraryHeader({setPageCount, setSearchData, setSearchState}) {
         <Container>
           <Row>
             <Col className="ml-auto mr-auto text-center" md="8">
-              <h2 className="title"> Search books </h2>
+              <h1 className="title"> Search books </h1>
             </Col>
           </Row>
           <Col className="ml-auto mr-auto" md="4">

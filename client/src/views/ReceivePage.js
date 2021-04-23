@@ -91,7 +91,7 @@ function ReceivePage() {
           <Container>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
-                <h2 className="title"> Register a book </h2>
+                <h1 className="title"> Register a book </h1>
                 <p>
                   {' '}
                   Have you received a book from another member? That is great

@@ -127,7 +127,6 @@ function Navigation() {
                     onClick={() => {
                       localStorage.removeItem('loggedin');
                     }}
-                    style={{"color":"black"}}
                   >
                     SIGN OUT
                   </NavLink>
