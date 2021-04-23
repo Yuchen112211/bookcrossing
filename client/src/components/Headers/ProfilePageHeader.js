@@ -45,9 +45,9 @@ function ProfilePageHeader({
           <div className="photo-container">
             <img alt="..." src={require('assets/img/ryan.jpg').default}></img>
           </div>
-          <h3 className="title">
+          <h1 className="h3 title">
             {firstname} {lastname}
-          </h3>
+          </h1>
           <p className="category">@{username}</p>
           <div className="content">
             <div className="social-description">

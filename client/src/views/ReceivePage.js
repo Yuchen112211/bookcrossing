@@ -13,7 +13,6 @@ import {
   Form,
   Row,
   Col,
-  Modal,
 } from 'reactstrap';
 
 // core components
@@ -57,12 +56,12 @@ function ReceivePage() {
         setErrorMsg('Unknown issue, please try again.');
       });
   };
-  
-  const formKeyPressed = (event) => {
-    if (event.code == "Enter") {
-      onRegisterClicked()
+
+  const formKeyPressed = event => {
+    if (event.code == 'Enter') {
+      onRegisterClicked();
     }
-  }
+  };
 
   React.useEffect(() => {
     document.body.classList.add('login-page');
@@ -101,7 +100,12 @@ function ReceivePage() {
             </Row>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
-                <Form action="" className="form" method="POST" onKeyDown={formKeyPressed}>
+                <Form
+                  action=""
+                  className="form"
+                  method="POST"
+                  onKeyDown={formKeyPressed}
+                >
                   <CardBody>
                     <InputGroup className={'no-border input-lg'}>
                       <Input
@@ -146,38 +150,51 @@ function ReceivePage() {
             </div>
           </Container>
         </div>
-        <Modal
-          isOpen={modalOpen}
-          modalClassName="bd-example-modal-sm"
-          toggle={() => setModalOpen(false)}
-        >
-          <div className="modal-header">
-            <h3 className="modal-title" id="mySmallModalLabel">
-              Congratulation!
-            </h3>
+        {modalOpen ? (
+          <div tabIndex="-1" style={{zIndex: "1050"}}>
+            <div>
+              <div
+                className="modal bd-example-modal-sm fade show"
+                role="dialog"
+                tabIndex="-1"
+                aria-label="sendBook"
+                style={{display: "block"}}
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content" style={{color: "#000000"}}>
+                    <div className="modal-header">
+                      <p className="h3 modal-title" id="receviedMessage">
+                        Congratulation!
+                      </p>
+                    </div>
+                    <div className="modal-body">
+                      You have successfully registered the book!
+                    </div>
+                    <div className="modal-footer">
+                      <Button
+                        type="button"
+                        className="btn"
+                        onClick={() => setModalOpen(false)}
+                      >
+                        Register Another One
+                      </Button>
+                      <Button
+                        type="button"
+                        className="btn"
+                        color="info"
+                        to="/profile"
+                        tag={Link}
+                      >
+                        My Profile
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-backdrop fade show"></div>
+            </div>
           </div>
-          <div className="modal-body">
-            You have successfully registered the book!
-          </div>
-          <div className="modal-footer">
-            <Button
-              type="button"
-              className="btn"
-              onClick={() => setModalOpen(false)}
-            >
-              Register Another One
-            </Button>
-            <Button
-              type="button"
-              className="btn"
-              color="info"
-              to="/profile"
-              tag={Link}
-            >
-              My Profile
-            </Button>
-          </div>
-        </Modal>
+        ) : null}
         <Footer bgColor="black" />
       </div>
     </>

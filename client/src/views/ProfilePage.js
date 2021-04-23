@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
   Switch,
   Redirect,
   Route,
   useRouteMatch,
   useParams,
-} from "react-router-dom";
-import PropTypes from "prop-types";
+} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // reactstrap components
 import {
@@ -20,18 +20,17 @@ import {
   NavLink,
   TabContent,
   TabPane,
-  Modal,
   Form,
   FormGroup,
   Input,
   Label,
-} from "reactstrap";
-import { Envelope, Pencil } from "react-bootstrap-icons";
+} from 'reactstrap';
+import {Envelope, Pencil} from 'react-bootstrap-icons';
 
 // core components
-import Navigation from "components/Navigation/Navigation.js";
-import Header from "components/Headers/ProfilePageHeader";
-import Footer from "components/Footer/Footer.js";
+import Navigation from 'components/Navigation/Navigation.js';
+import Header from 'components/Headers/ProfilePageHeader';
+import Footer from 'components/Footer/Footer.js';
 
 function ProfilePage() {
   const match = useRouteMatch();
@@ -43,7 +42,7 @@ function ProfilePage() {
           <Profile />
         </Route>
         <Route path={match.path}>
-          <Redirect to={`profile/${localStorage.getItem("loggedin")}`} />
+          <Redirect to={`profile/${localStorage.getItem('loggedin')}`} />
         </Route>
       </Switch>
     </div>
@@ -51,9 +50,9 @@ function ProfilePage() {
 }
 
 function Profile() {
-  const { username } = useParams();
+  const {username} = useParams();
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [errMsg, setErrMsg] = React.useState("");
+  const [errMsg, setErrMsg] = React.useState('');
   const [userData, setUserData] = React.useState({
     username: username,
     sent: [],
@@ -64,28 +63,28 @@ function Profile() {
   const [pills, setPills] = React.useState(0);
 
   const onUpdateClicked = () => {
-    setErrMsg("");
-    console.log("userData", userData);
-    const url = "/api/users/update";
+    setErrMsg('');
+    console.log('userData', userData);
+    const url = '/api/users/update';
     const body = {
-      firstname: document.getElementById("fieldFirstname").value,
-      lastname: document.getElementById("fieldLastname").value,
-      mailingAddress: document.getElementById("fieldMailingAddress").value,
-      about: document.getElementById("fieldAbout").value,
-      instagram: document.getElementById("fieldInstagram").value,
-      twitter: document.getElementById("fieldTwitter").value,
+      firstname: document.getElementById('fieldFirstname').value,
+      lastname: document.getElementById('fieldLastname').value,
+      mailingAddress: document.getElementById('fieldMailingAddress').value,
+      about: document.getElementById('fieldAbout').value,
+      instagram: document.getElementById('fieldInstagram').value,
+      twitter: document.getElementById('fieldTwitter').value,
     };
-    console.log("body", body);
+    console.log('body', body);
     if (!body.firstname || body.firstname.length === 0) {
-      setErrMsg("First name cannot be empty");
+      setErrMsg('First name cannot be empty');
       return;
     }
     if (!body.lastname || body.lastname.length === 0) {
-      setErrMsg("Last name cannot be empty");
+      setErrMsg('Last name cannot be empty');
       return;
     }
     if (!body.mailingAddress || body.mailingAddress.length === 0) {
-      setErrMsg("Mailing address cannot be empty");
+      setErrMsg('Mailing address cannot be empty');
       return;
     }
     if (!body.about || body.about.length === 0) {
@@ -97,11 +96,11 @@ function Profile() {
     if (!body.twitter || body.twitter.length === 0) {
       delete body.twitter;
     }
-    console.log("body", body);
+    console.log('body', body);
     fetch(url, {
-      method: "post",
+      method: 'post',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
@@ -109,12 +108,12 @@ function Profile() {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           window.location.reload();
         }
       })
       .catch(function (error) {
-        const msg = "Unknown issue, please try again.";
+        const msg = 'Unknown issue, please try again.';
         setErrMsg(msg);
       });
   };
@@ -122,16 +121,16 @@ function Profile() {
   React.useEffect(() => {
     const url = `/api/users/info/${username}`;
     fetch(url, {
-      method: "get",
+      method: 'get',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        if (data.msg === "success") {
+        if (data.msg === 'success') {
           if (pills === 0) {
             setCurrentList(data.data.sent);
           } else if (pills === 1) {
@@ -147,13 +146,13 @@ function Profile() {
         console.log(error);
       });
 
-    document.body.classList.add("profile-page");
-    document.body.classList.add("sidebar-collapse");
-    document.documentElement.classList.remove("nav-open");
+    document.body.classList.add('profile-page');
+    document.body.classList.add('sidebar-collapse');
+    document.documentElement.classList.remove('nav-open');
     document.body.scrollTop = 0;
     return function cleanup() {
-      document.body.classList.remove("profile-page");
-      document.body.classList.remove("sidebar-collapse");
+      document.body.classList.remove('profile-page');
+      document.body.classList.remove('sidebar-collapse');
     };
   }, []);
 
@@ -178,7 +177,7 @@ function Profile() {
                   className="btn-round"
                   color="info"
                   size="lg"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     setModalOpen(true);
                   }}
@@ -237,22 +236,22 @@ function Profile() {
                   ]
                 : null}
             </div>
-            <h3 className="title">About me</h3>
-            <h5 className="description">{userData.about}</h5>
+            <p className="h3 title">About me</p>
+            <p className="h5 description">{userData.about}</p>
             <Row>
               <Col className="ml-auto mr-auto" md="6">
-                <h4 className="title text-center">My Inventory</h4>
+                <p className="h4 title text-center">My Inventory</p>
                 <div className="nav-align-center">
                   <Nav
                     className="nav-pills-info nav-pills-just-icons"
                     pills
-                    role="tablist"
+                    // role="tablist"
                   >
                     <NavItem>
                       <NavLink
-                        className={pills === 0 ? "active" : ""}
+                        className={pills === 0 ? 'active' : ''}
                         href="#pablo"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           setPills(0);
                           setCurrentList(userData.sent);
@@ -264,9 +263,9 @@ function Profile() {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        className={pills === 1 ? "active" : ""}
+                        className={pills === 1 ? 'active' : ''}
                         href="#pablo"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           setPills(1);
                           setCurrentList(userData.received);
@@ -278,9 +277,9 @@ function Profile() {
                     </NavItem>
                     <NavItem>
                       <NavLink
-                        className={pills === 2 ? "active" : ""}
+                        className={pills === 2 ? 'active' : ''}
                         href="#pablo"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           setPills(2);
                           setCurrentList(userData.traveling);
@@ -293,16 +292,15 @@ function Profile() {
                   </Nav>
                 </div>
               </Col>
-              <TabContent className="gallery" activeTab={"pills" + pills}>
+              <TabContent className="gallery" activeTab={'pills' + pills}>
                 <TabPane tabId="pills1"></TabPane>
                 <TabPane tabId="pills2"></TabPane>
                 <TabPane tabId="pills3"></TabPane>
               </TabContent>
             </Row>
           </Container>
-          <h1> </h1>
           <Container>
-            <Row className="text-center">
+            <Row className="text-center" style={{marginTop: 30}}>
               <Col md="2">Book ID</Col>
               <Col md="2">From</Col>
               <Col md="2">To</Col>
@@ -312,89 +310,101 @@ function Profile() {
             <InventoryTable list={currentList} />
           </Container>
         </div>
-        {username === userData.username ? (
-          <Modal
-            isOpen={modalOpen}
-            modalClassName="bd-example-modal-sm"
-            toggle={() => setModalOpen(false)}
-          >
-            <div className="modal-header">
-              <h3 className="modal-title" id="myModalLabel">
-                Edit Profile
-              </h3>
+        {username === userData.username && modalOpen ? (
+          <div tabIndex="-1" style={{zIndex: "1050"}}>
+            <div>
+              <div
+                className="modal bd-example-modal-sm fade show"
+                role="dialog"
+                tabIndex="-1"
+                aria-label="editProfile"
+                style={{display: "block"}}
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <p className="h3 modal-title" id="myModalLabel">
+                        Edit Profile
+                      </p>
+                    </div>
+                    <div className="modal-body">
+                      <Form action="" className="form" method="POST">
+                        <FormGroup>
+                          <Label for="fieldFirstname">First Name</Label>
+                          <Input
+                            id="fieldFirstname"
+                            type="text"
+                            defaultValue={userData.firstname}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fieldLastname">Last Name</Label>
+                          <Input
+                            id="fieldLastname"
+                            type="text"
+                            defaultValue={userData.lastname}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fieldMailingAddress">
+                            Mailing Address
+                          </Label>
+                          <Input
+                            id="fieldMailingAddress"
+                            type="text"
+                            defaultValue={userData.mailingAddress}
+                          ></Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fieldAbout">About</Label>
+                          <Input
+                            id="fieldAbout"
+                            rows="3"
+                            type="textarea"
+                            defaultValue={userData.about}
+                          >
+                            {userData.about}
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fieldInstagram">Instagram</Label>
+                          <Input
+                            id="fieldInstagram"
+                            type="text"
+                            defaultValue={userData.instagram}
+                          >
+                            {userData.instagram}
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fieldTwitter">Twitter</Label>
+                          <Input
+                            id="fieldTwitter"
+                            type="text"
+                            defaultValue={userData.twitter}
+                          >
+                            {userData.twitter}
+                          </Input>
+                        </FormGroup>
+                        <Button
+                          block
+                          className="btn-round btn-info"
+                          color="info"
+                          size="lg"
+                          onClick={onUpdateClicked}
+                        >
+                          Update
+                        </Button>
+                      </Form>
+                      <p id="error" style={{color: 'red'}}>
+                        {errMsg}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="modal-body">
-              <Form action="" className="form" method="POST">
-                <FormGroup>
-                  <Label for="fieldFirstname">First Name</Label>
-                  <Input
-                    id="fieldFirstname"
-                    type="text"
-                    defaultValue={userData.firstname}
-                  ></Input>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="fieldLastname">Last Name</Label>
-                  <Input
-                    id="fieldLastname"
-                    type="text"
-                    defaultValue={userData.lastname}
-                  ></Input>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="fieldMailingAddress">Mailing Address</Label>
-                  <Input
-                    id="fieldMailingAddress"
-                    type="text"
-                    defaultValue={userData.mailingAddress}
-                  ></Input>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="fieldAbout">About</Label>
-                  <Input
-                    id="fieldAbout"
-                    rows="3"
-                    type="textarea"
-                    defaultValue={userData.about}
-                  >
-                    {userData.about}
-                  </Input>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="fieldInstagram">Instagram</Label>
-                  <Input
-                    id="fieldInstagram"
-                    type="text"
-                    defaultValue={userData.instagram}
-                  >
-                    {userData.instagram}
-                  </Input>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="fieldTwitter">Twitter</Label>
-                  <Input
-                    id="fieldTwitter"
-                    type="text"
-                    defaultValue={userData.twitter}
-                  >
-                    {userData.twitter}
-                  </Input>
-                </FormGroup>
-                <Button
-                  block
-                  className="btn-round btn-info"
-                  color="info"
-                  size="lg"
-                  onClick={onUpdateClicked}
-                >
-                  Update
-                </Button>
-              </Form>
-              <p id="error" style={{ color: "red" }}>
-                {errMsg}
-              </p>
-            </div>
-          </Modal>
+          </div>
         ) : null}
 
         <Footer bgColor="black" />
@@ -403,11 +413,11 @@ function Profile() {
   );
 }
 
-function InventoryTable({ list }) {
+function InventoryTable({list}) {
   return (
     <>
       <Row className="text-center">
-        {list.map((item) => [
+        {list.map(item => [
           <Col key={item.crossingId} md="2">
             {item.crossingId}
           </Col>,

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 // reactstrap components
-import {Col, Button, Container, Row, Modal} from 'reactstrap';
+import {Col, Button, Container, Row} from 'reactstrap';
 // core components
 import Navigation from 'components/Navigation/Navigation.js';
 import Footer from 'components/Footer/Footer.js';
@@ -93,16 +93,16 @@ function SendPage() {
                 <h1 className="title"> Send a book </h1>
                 <div className="progress-container progress-info">
                   <span className="progress-badge">
-                    Traveling: {travelingCount} out of 5 postcards
+                    Traveling: {travelingCount} out of 5 books
                   </span>
                   <div className="progress">
-                    <div 
-                      className="progress-bar" 
-                      role="progressbar" 
-                      aria-valuenow="0" 
-                      aria-valuemin="0" 
-                      aria-valuemax="5" 
-                      style={{"width": "0%"}} 
+                    <div
+                      className="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="0"
+                      aria-valuemin="0"
+                      aria-valuemax="5"
+                      style={{width: '0%'}}
                       aria-label="travelingCount"
                     >
                       <span className="progress-value" title="LeftNumber">
@@ -139,40 +139,54 @@ function SendPage() {
             </div>
           </Container>
         </div>
-        <Modal
-          isOpen={modalOpen}
-          modalClassName="bd-example-modal-sm"
-          toggle={() => setModalOpen(false)}
-        >
-          <div className="modal-header">
-            <h3 className="modal-title" id="myModalLabel">
-              Crossing ID: {crossing.crossingId}
-            </h3>
+        {modalOpen ? (
+          <div tabIndex="-1" style={{zIndex: "1050"}}>
+            <div>
+              <div
+                className="modal bd-example-modal-sm fade show"
+                role="dialog"
+                tabIndex="-1"
+                aria-label="sendBook"
+                style={{display: "block"}}
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content" style={{color: "#000000"}}>
+                    <div className="modal-header">
+                      <p className="h3 modal-title" id="myModalLabel">
+                        Crossing ID: {crossing.crossingId}
+                      </p>
+                    </div>
+                    <div className="modal-body">
+                      <p className="h5">
+                        Please send your book to the address:
+                      </p>
+                      <p className="h5">{crossing.mailingAddress}</p>
+                      <i>Reminder: Do not forget to attach the Crossing ID</i>
+                    </div>
+                    <div className="modal-footer">
+                      <Button
+                        type="button"
+                        className="btn"
+                        onClick={() => setModalOpen(false)}
+                      >
+                        Send Another One
+                      </Button>
+                      <Button
+                        type="button"
+                        className="btn"
+                        color="info"
+                        to="/profile"
+                        tag={Link}
+                      >
+                        My Profile
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="modal-body">
-            <h5>Please send your book to the address:</h5>
-            <h5>{crossing.mailingAddress}</h5>
-            <i>Reminder: Do not forget attch the Crossing ID</i>
-          </div>
-          <div className="modal-footer">
-            <Button
-              type="button"
-              className="btn"
-              onClick={() => setModalOpen(false)}
-            >
-              Send Another One
-            </Button>
-            <Button
-              type="button"
-              className="btn"
-              color="info"
-              to="/profile"
-              tag={Link}
-            >
-              My Profile
-            </Button>
-          </div>
-        </Modal>
+        ) : null}
         <Footer bgColor="black" />
       </div>
     </>

@@ -25,6 +25,7 @@ const Pagination = ({currentPage, pageCount, pageSetter}) => {
       <b key={index}>
         {Number.isInteger(val) && (
           <Button
+            className="btn-info"
             onClick={() => {
               pageSetter(val);
             }}
@@ -32,7 +33,7 @@ const Pagination = ({currentPage, pageCount, pageSetter}) => {
             {val}
           </Button>
         )}
-        {!Number.isInteger(val) && <Button>...</Button>}
+        {!Number.isInteger(val) && <Button className="btn-info">...</Button>}
       </b>
     ));
   };
@@ -42,6 +43,7 @@ const Pagination = ({currentPage, pageCount, pageSetter}) => {
       <Container>
         <Row>
           <Button
+            className="btn-info"
             onClick={() => {
               if (currentPage > 0) {
                 pageSetter(1);
@@ -51,6 +53,7 @@ const Pagination = ({currentPage, pageCount, pageSetter}) => {
             Head
           </Button>
           <Button
+            className="btn-info"
             onClick={() => {
               if (currentPage > 1) {
                 pageSetter(currentPage - 1);
@@ -61,6 +64,7 @@ const Pagination = ({currentPage, pageCount, pageSetter}) => {
           </Button>
           {pages()}
           <Button
+            className="btn-info"
             onClick={() => {
               if (currentPage < pageCount) {
                 pageSetter(currentPage + 1);
@@ -70,6 +74,7 @@ const Pagination = ({currentPage, pageCount, pageSetter}) => {
             Next
           </Button>
           <Button
+            className="btn-info"
             onClick={() => {
               if (currentPage < pageCount) {
                 pageSetter(pageCount);
