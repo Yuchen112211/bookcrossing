@@ -143,7 +143,7 @@ function SignupPage() {
                       </InputGroupAddon>
                       <Input
                         id="fieldUsername"
-                        placeholder="Username"
+                        placeholder="Username (6+ numbers or characters)"
                         type="text"
                         onFocus={() => setUsernameFocus(true)}
                         onBlur={() => setUsernameFocus(false)}
@@ -173,7 +173,7 @@ function SignupPage() {
                       </InputGroupAddon>
                       <Input
                         id="fieldPassword"
-                        placeholder="Password"
+                        placeholder="Password (8+ numbers or characters)"
                         type="password"
                         onFocus={() => setPasswordFocus(true)}
                         onBlur={() => setPasswordFocus(false)}
