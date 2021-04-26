@@ -2227,7 +2227,7 @@ textarea.form-control {
 
 .form-check.disabled .form-check-label,
 .form-check.disabled .form-check-label {
-  color: #9A9A9A;
+  color: #595959;
   opacity: .5;
   cursor: not-allowed; }
 
@@ -2283,11 +2283,11 @@ textarea.form-control {
   opacity: 1; }
 
 .form-check-radio input[type="radio"]:disabled + .form-check-sign {
-  color: #9A9A9A; }
+  color: #595959; }
 
 .form-check-radio input[type="radio"]:disabled + .form-check-sign::before,
 .form-check-radio input[type="radio"]:disabled + .form-check-sign::after {
-  color: #9A9A9A; }
+  color: #595959; }
 
 .progress-container {
   position: relative; }
@@ -2569,13 +2569,13 @@ p {
 .description,
 .card-description,
 .footer-big p {
-  color: #9A9A9A;
+  color: #595959;
   font-weight: 300; }
 
 .category {
   text-transform: capitalize;
   font-weight: 700;
-  color: #9A9A9A; }
+  color: #595959; }
 
 .text-primary {
   color: #f96332 !important; }
@@ -2727,7 +2727,7 @@ body {
   .nav-pills .nav-item .nav-link:hover {
     background-color: rgba(222, 222, 222, 0.3); }
   .nav-pills .nav-item .nav-link.active, .nav-pills .nav-item .nav-link.active:focus, .nav-pills .nav-item .nav-link.active:hover {
-    background-color: #9A9A9A;
+    background-color: #595959;
     color: #FFFFFF;
     box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3); }
   .nav-pills .nav-item .nav-link.disabled, .nav-pills .nav-item .nav-link:disabled, .nav-pills .nav-item .nav-link[disabled] {
