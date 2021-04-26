@@ -59,7 +59,6 @@ function Profile() {
     received: [],
     traveling: [],
   });
-  const [currentList, setCurrentList] = React.useState([]);
   const [pills, setPills] = React.useState(0);
 
   const onUpdateClicked = () => {
@@ -119,6 +118,7 @@ function Profile() {
   };
 
   React.useEffect(() => {
+    console.log("userData", userData);
     const url = `/api/users/info/${username}`;
     fetch(url, {
       method: 'get',
@@ -131,15 +131,8 @@ function Profile() {
       })
       .then(function (data) {
         if (data.msg === 'success') {
-          if (pills === 0) {
-            setCurrentList(data.data.sent);
-          } else if (pills === 1) {
-            setCurrentList(data.data.received);
-          } else if (pills === 2) {
-            setCurrentList(data.data.traveling);
-          }
+          console.log("data.data", data.data);
           setUserData(data.data);
-          console.log(userData);
         }
       })
       .catch(function (error) {
@@ -256,7 +249,6 @@ function Profile() {
                         onClick={e => {
                           e.preventDefault();
                           setPills(0);
-                          setCurrentList(userData.sent);
                         }}
                       >
                         <i className="now-ui-icons ui-1_send"></i>
@@ -270,7 +262,6 @@ function Profile() {
                         onClick={e => {
                           e.preventDefault();
                           setPills(1);
-                          setCurrentList(userData.received);
                         }}
                       >
                         <i className="now-ui-icons files_box"></i>
@@ -284,7 +275,6 @@ function Profile() {
                         onClick={e => {
                           e.preventDefault();
                           setPills(2);
-                          setCurrentList(userData.traveling);
                         }}
                       >
                         <i className="now-ui-icons shopping_delivery-fast"></i>
@@ -307,9 +297,11 @@ function Profile() {
               <Col md="2">From</Col>
               <Col md="2">To</Col>
               <Col md="3">Sent</Col>
-              <Col md="3">Received</Col>
+              {pills === 2 ? null : <Col md="3">Received</Col>}
             </Row>
-            <InventoryTable list={currentList} />
+            {pills === 0 ? <InventoryTable list={userData.sent} /> : null}
+            {pills === 1 ? <InventoryTable list={userData.received} /> : null}
+            {pills === 2 ? <InventoryTable list={userData.traveling} /> : null}
           </Container>
         </div>
         {username === userData.username && modalOpen ? (
