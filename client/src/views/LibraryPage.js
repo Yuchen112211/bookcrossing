@@ -36,8 +36,8 @@ function LibraryPage() {
     const currentBooks = [];
     searchData.forEach((book, key) => {
       if (
-        parseInt(key) >= (pageSelected - 1) * 10 &&
-        parseInt(key) <= pageSelected * 10
+        parseInt(key) >= (pageSelected - 1) * 12 &&
+        parseInt(key) < pageSelected * 12
       ) {
         currentBooks.push(book);
       }

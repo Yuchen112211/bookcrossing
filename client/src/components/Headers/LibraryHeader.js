@@ -62,7 +62,7 @@ function LibraryHeader({setPageCount, setSearchData, setSearchState}) {
       })
       .then(function (data) {
         if (data.msg === 'success') {
-          setPageCount(parseInt(data.data.length / 10, 10) + 1);
+          setPageCount(parseInt(data.data.length / 12, 10) + 1);
           setSearchData(data.data);
           setSearchState(true);
         } else {
